@@ -16,7 +16,7 @@ object ApplicationBuild extends Build {
       "org.joda" % "joda-convert" % "1.2"
     )
 
-    val main = PlayProject(appName, appVersion, appDependencies, mainLang = SCALA).settings(
+    val main = play.Project(appName, appVersion, appDependencies).settings(
       scalacOptions ++= Seq("-feature", "-deprecation", "-unchecked")
     )
 
