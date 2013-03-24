@@ -1,7 +1,33 @@
-@()
+@(formBMC: Form[RecordBMC], formInfo: Form[RecordInfo])
+@import helper.twitterBootstrap._
 
 @main("web2day Application Form") {
 
 <h1>web2day Application Form</h1>
+@helper.form(action = routes.Application.addRecord) {
+  @helper.textarea(formBMC("partners"))
+  @helper.textarea(formBMC("activities"))
+  @helper.textarea(formBMC("resources"))
+  @helper.textarea(formBMC("propositions"))
+  @helper.textarea(formBMC("customerRelationships"))
+  @helper.textarea(formBMC("channels"))
+  @helper.textarea(formBMC("customerSegments"))
+  @helper.textarea(formBMC("costStructure"))
+  @helper.textarea(formBMC("revenueStreams"))
+
+  @helper.textarea(formInfo("pitch"))
+  @helper.inputText(formInfo("name"))
+  @helper.inputText(formInfo("company"))
+  @helper.inputText(formInfo("companyCreation"))
+  @helper.inputText(formInfo("companyWebsite"))
+  @helper.inputText(formInfo("email"))
+  @helper.inputText(formInfo("phone"))
+  @helper.inputText(formInfo("twitter"))
+  @helper.inputText(formInfo("angelco"))
+  @helper.inputText(formInfo("presentationUrl"))
+  @helper.inputText(formInfo("amount"))
+
+  <input type="submit" value="@Messages("apply")" />
+}
 
 }

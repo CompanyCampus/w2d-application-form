@@ -1,0 +1,27 @@
+partners=Partners
+activities=Activities
+resources=Resources
+propositions=Propositions
+customerRelationships=Customer relationships
+channels=Channels
+customerSegments=Customer segments
+channels=Channels
+customerSegments=Customer segments
+costStructure=Cost structure
+revenueStreams=Revenue streams
+pitch=Pitch
+name=Name
+company=Company
+companyCreation=Company's creation date
+companyWebsite=Company's website
+email=E-mail
+phone=Phone
+twitter=Twitter
+angelco=Angel.co page
+presentationUrl=A presentation''s URL
+amount=Amount wanted
+
+apply=Apply
+
+record.saved=We''ve got your application!
+record.error=Oops, something wrong happened on our end. Try again?

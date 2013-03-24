@@ -24,10 +24,10 @@ case class Record (
   companyWebsite: String,
   email: String,
   phone: String,
-  twitter: String,
-  angelco: String,
-  presentationUrl: String,
-  amount: Integer
+  twitter: Option[String],
+  angelco: Option[String],
+  presentationUrl: Option[String],
+  amount: Option[Int]
 ) {
   def save() = {
     Try {
@@ -39,6 +39,31 @@ case class Record (
   }
 }
 
+case class RecordBMC (
+  partners: String,
+  activities: String,
+  resources: String,
+  propositions: String,
+  customerRelationships: String,
+  channels: String,
+  customerSegments: String,
+  costStructure: String,
+  revenueStreams: String
+)
+case class RecordInfo(
+  pitch: String,
+  name: String,
+  company: String,
+  companyCreation: DateTime,
+  companyWebsite: String,
+  email: String,
+  phone: String,
+  twitter: Option[String],
+  angelco: Option[String],
+  presentationUrl: Option[String],
+  amount: Option[Int]
+)
+
 object Record {
   def applyFromDAL(
     id: UUID, date: Timestamp,
@@ -46,8 +71,8 @@ object Record {
     customerRelationships: String, channels: String, customerSegments: String,
     costStructure: String, revenueStreams: String,
     pitch: String, name: String, company: String, companyCreation: Timestamp,
-    companyWebsite: String, email: String, phone: String, twitter: String,
-    angelco: String, presentationUrl: String, amount: Int
+    companyWebsite: String, email: String, phone: String, twitter: Option[String],
+    angelco: Option[String], presentationUrl: Option[String], amount: Option[Int]
   ): Record = {
     Record(
       id = id,
@@ -80,8 +105,8 @@ object Record {
     String, String, String,
     String, String,
     String, String, String, Timestamp,
-    String, String, String, String,
-    String, String, Int
+    String, String, String, Option[String],
+    Option[String], Option[String], Option[Int]
   )] = {
     Some(
       record.id, new Timestamp(record.date.getMillis),
@@ -91,6 +116,33 @@ object Record {
       record.pitch, record.name, record.company, new Timestamp(record.companyCreation.getMillis),
       record.companyWebsite, record.email, record.phone, record.twitter,
       record.angelco, record.presentationUrl, record.amount
+    )
+  }
+
+  def create(bmc: RecordBMC, info: RecordInfo): Record = {
+    Record(
+      id = UUID.randomUUID(),
+      date = new DateTime,
+      partners = bmc.partners,
+      activities = bmc.activities,
+      resources = bmc.resources,
+      propositions = bmc.propositions,
+      customerRelationships = bmc.customerRelationships,
+      channels = bmc.channels,
+      customerSegments = bmc.customerSegments,
+      costStructure = bmc.costStructure,
+      revenueStreams = bmc.revenueStreams,
+      pitch = info.pitch,
+      name = info.name,
+      company = info.company,
+      companyCreation = new DateTime(info.companyCreation),
+      companyWebsite = info.companyWebsite,
+      email = info.email,
+      phone = info.phone,
+      twitter = info.twitter,
+      angelco = info.angelco,
+      presentationUrl = info.presentationUrl,
+      amount = info.amount
     )
   }
 
@@ -127,10 +179,10 @@ trait RecordComponent {
     def companyWebsite = column[String]("record_company-website")
     def email = column[String]("record_email")
     def phone = column[String]("record_phone")
-    def twitter = column[String]("record_twitter")
-    def angelco = column[String]("record_angelco")
-    def presentationUrl = column[String]("record_presentationUrl")
-    def amount = column[Int]("record_amount")
+    def twitter = column[Option[String]]("record_twitter")
+    def angelco = column[Option[String]]("record_angelco")
+    def presentationUrl = column[Option[String]]("record_presentationUrl")
+    def amount = column[Option[Int]]("record_amount")
     def * = (
       id ~ date ~ partners ~ activities ~ resources ~ propositions ~
       customerRelationships ~ channels ~ customerSegments ~
