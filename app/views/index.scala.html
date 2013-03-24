@@ -5,29 +5,48 @@
 
 <h1>web2day Application Form</h1>
 @helper.form(action = routes.Application.addRecord) {
-  @helper.textarea(formBMC("partners"))
-  @helper.textarea(formBMC("activities"))
-  @helper.textarea(formBMC("resources"))
-  @helper.textarea(formBMC("propositions"))
-  @helper.textarea(formBMC("customerRelationships"))
-  @helper.textarea(formBMC("channels"))
-  @helper.textarea(formBMC("customerSegments"))
-  @helper.textarea(formBMC("costStructure"))
-  @helper.textarea(formBMC("revenueStreams"))
+  <div class="row bmc bmc-top">
+    <div class="span2">
+      @helper.textarea(formBMC("partners"))
+    </div>
+    <div class="span3">
+      @helper.textarea(formBMC("activities"))
+      @helper.textarea(formBMC("resources"))
+    </div>
+    <div class="span2">
+      @helper.textarea(formBMC("propositions"))
+    </div>
+    <div class="span3">
+      @helper.textarea(formBMC("customerRelationships"))
+      @helper.textarea(formBMC("channels"))
+    </div>
+    <div class="span2">
+      @helper.textarea(formBMC("customerSegments"))
+    </div>
+  </div>
+  <div class="row bmc">
+    <div class="span6">@helper.textarea(formBMC("costStructure"))</div>
+    <div class="span6">@helper.textarea(formBMC("revenueStreams"))</div>
+  </div>
 
-  @helper.textarea(formInfo("pitch"))
-  @helper.inputText(formInfo("name"))
-  @helper.inputText(formInfo("company"))
-  @helper.inputText(formInfo("companyCreation"))
-  @helper.inputText(formInfo("companyWebsite"))
-  @helper.inputText(formInfo("email"))
-  @helper.inputText(formInfo("phone"))
-  @helper.inputText(formInfo("twitter"))
-  @helper.inputText(formInfo("angelco"))
-  @helper.inputText(formInfo("presentationUrl"))
-  @helper.inputText(formInfo("amount"))
-
-  <input type="submit" value="@Messages("apply")" />
+  <div class="row">
+    <div class="span6">
+      @helper.textarea(formInfo("pitch"))
+      @helper.inputText(formInfo("name"))
+      @helper.inputText(formInfo("company"))
+      @helper.inputText(formInfo("companyCreation"))
+      @helper.inputText(formInfo("companyWebsite"))
+      @helper.inputText(formInfo("email"))
+      @helper.inputText(formInfo("phone"))
+      @helper.inputText(formInfo("twitter"))
+      @helper.inputText(formInfo("angelco"))
+      @helper.inputText(formInfo("presentationUrl"))
+      @helper.inputText(formInfo("amount"))
+    </div>
+  </div>
+  <div class="row">
+    <div class="span12"><input class="btn btn-primary" type="submit" value="@Messages("apply")" /><div>
+  </div>
 }
 
 }

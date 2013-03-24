@@ -1,0 +1,44 @@
+textarea, input[type=text] {
+  width: 100%;
+}
+
+textarea {
+  height: 150px;
+}
+
+.help-block {
+  display: none;
+}
+
+.bmc label {
+  position: relative;
+  top: 30px;
+  left: 5px;
+  font-size: 1.3em;
+}
+
+.bmc textarea {
+  padding-top: 30px;
+}
+
+.bmc-top > div {
+  height: 500px;
+  margin-bottom: 50px;
+}
+
+.bmc-top .span2 div, .bmc-top .span2 textarea {
+  height: 100%;
+}
+
+.bmc-top .span3 > div {
+  height: 50%;
+  margin-bottom: 25px;
+}
+
+.bmc-top .span3 .input {
+  height: 90%;
+}
+
+.bmc-top .span3 textarea {
+  height: 100%;
+}
