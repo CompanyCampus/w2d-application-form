@@ -1,0 +1,68 @@
+@(record: models.Record)
+
+@main("web2day Application") {
+
+<h1>web2day Application</h1>
+
+<h3>@Messages("partners")</h3>
+<p>@{record.partners}</p>
+
+<h3>@Messages("activities")</h3>
+<p>@{record.activities}</p>
+
+<h3>@Messages("resources")</h3>
+<p>@{record.resources}</p>
+
+<h3>@Messages("propositions")</h3>
+<p>@{record.propositions}</p>
+
+<h3>@Messages("customerRelationships")</h3>
+<p>@{record.customerRelationships}</p>
+
+<h3>@Messages("channels")</h3>
+<p>@{record.channels}</p>
+
+<h3>@Messages("customerSegments")</h3>
+<p>@{record.customerSegments}</p>
+
+<h3>@Messages("costStructure")</h3>
+<p>@{record.costStructure}</p>
+
+<h3>@Messages("revenueStreams")</h3>
+<p>@{record.revenueStreams}</p>
+
+<h3>@Messages("pitch")</h3>
+<p>@{record.pitch}</p>
+
+<h3>@Messages("name")</h3>
+<p>@{record.name}</p>
+
+<h3>@Messages("company")</h3>
+<p>@{record.company}</p>
+
+<h3>@Messages("companyCreation")</h3>
+<p>@{record.companyCreation}</p>
+
+<h3>@Messages("companyWebsite")</h3>
+<p>@{record.companyWebsite}</p>
+
+<h3>@Messages("email")</h3>
+<p>@{record.email}</p>
+
+<h3>@Messages("phone")</h3>
+<p>@{record.phone}</p>
+
+<h3>@Messages("twitter")</h3>
+<p>@{record.twitter getOrElse ""}</p>
+
+<h3>@Messages("angelco")</h3>
+<p>@{record.angelco getOrElse ""}</p>
+
+<h3>@Messages("presentationUrl")</h3>
+<p>@{record.presentationUrl getOrElse ""}</p>
+
+<h3>@Messages("amount")</h3>
+<p>@{record.amount getOrElse 0}</p>
+
+
+}

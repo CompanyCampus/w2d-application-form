@@ -1,0 +1,58 @@
+@(records: List[models.Record])
+
+@main("web2day Applications") {
+
+<h1>web2day Applications</h1>
+
+<table class="table table-hover">
+  <thead><tr>
+    <th>@Messages("partners")</th>
+    <th>@Messages("activities")</th>
+    <th>@Messages("resources")</th>
+    <th>@Messages("propositions")</th>
+    <th>@Messages("customerRelationships")</th>
+    <th>@Messages("channels")</th>
+    <th>@Messages("customerSegments")</th>
+    <th>@Messages("costStructure")</th>
+    <th>@Messages("revenueStreams")</th>
+    <th>@Messages("pitch")</th>
+    <th>@Messages("name")</th>
+    <th>@Messages("company")</th>
+    <th>@Messages("companyCreation")</th>
+    <th>@Messages("companyWebsite")</th>
+    <th>@Messages("email")</th>
+    <th>@Messages("phone")</th>
+    <th>@Messages("twitter")</th>
+    <th>@Messages("angelco")</th>
+    <th>@Messages("presentationUrl")</th>
+    <th>@Messages("amount")</th>
+  </tr></thead>
+  <tbody>
+    @for(r <- records) {
+      <tr data-uuid="@r.id">
+        <td>@{r.partners}</td>
+        <td>@{r.activities}</td>
+        <td>@{r.resources}</td>
+        <td>@{r.propositions}</td>
+        <td>@{r.customerRelationships}</td>
+        <td>@{r.channels}</td>
+        <td>@{r.customerSegments}</td>
+        <td>@{r.costStructure}</td>
+        <td>@{r.revenueStreams}</td>
+        <td>@{r.pitch}</td>
+        <td>@{r.name}</td>
+        <td>@{r.company}</td>
+        <td>@{r.companyCreation}</td>
+        <td>@{r.companyWebsite}</td>
+        <td>@{r.email}</td>
+        <td>@{r.phone}</td>
+        <td>@{r.twitter}</td>
+        <td>@{r.angelco}</td>
+        <td>@{r.presentationUrl}</td>
+        <td>@{r.amount}</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+}

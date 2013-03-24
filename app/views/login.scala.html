@@ -1,0 +1,29 @@
+@(loginForm: Form[(String,String)])
+
+@import helper.twitterBootstrap._
+
+@main("Login") {
+<div class="row">
+  <div class="span12">
+    <h1>Administration</h1>
+  </div>
+  <div class="span12">
+    <h2>Login</h2>
+    @helper.form(action = routes.Application.authenticate, 'class -> "form-horizontal") {
+
+      @for(error <- loginForm.globalErrors) {
+        <p>@error.message</p>
+      }
+      
+      <p>
+        @helper.inputText(loginForm("login"))
+        @helper.inputPassword(loginForm("password"))
+      </p>
+
+      <input type="submit" class="btn btn-primary" value="Connexion" />
+
+    }
+  </div>
+</div>
+}
+
