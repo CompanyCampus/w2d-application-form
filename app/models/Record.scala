@@ -8,26 +8,8 @@ import scala.slick.session._
 case class Record (
   id: UUID,
   date: DateTime,
-  partners: String,
-  activities: String,
-  resources: String,
-  propositions: String,
-  customerRelationships: String,
-  channels: String,
-  customerSegments: String,
-  costStructure: String,
-  revenueStreams: String,
-  pitch: String,
-  name: String,
-  company: String,
-  companyCreation: DateTime,
-  companyWebsite: String,
-  email: String,
-  phone: String,
-  twitter: Option[String],
-  angelco: Option[String],
-  presentationUrl: Option[String],
-  amount: Option[Int]
+  bmc: RecordBMC,
+  info: RecordInfo
 ) {
   def save() = {
     Try {
@@ -77,26 +59,30 @@ object Record {
     Record(
       id = id,
       date = new DateTime(date),
-      partners = partners,
-      activities = activities,
-      resources = resources,
-      propositions = propositions,
-      customerRelationships = customerRelationships,
-      channels = channels,
-      customerSegments = customerSegments,
-      costStructure = costStructure,
-      revenueStreams = revenueStreams,
-      pitch = pitch,
-      name = name,
-      company = company,
-      companyCreation = new DateTime(companyCreation),
-      companyWebsite = companyWebsite,
-      email = email,
-      phone = phone,
-      twitter = twitter,
-      angelco = angelco,
-      presentationUrl = presentationUrl,
-      amount = amount
+      bmc = RecordBMC(
+        partners = partners,
+        activities = activities,
+        resources = resources,
+        propositions = propositions,
+        customerRelationships = customerRelationships,
+        channels = channels,
+        customerSegments = customerSegments,
+        costStructure = costStructure,
+        revenueStreams = revenueStreams
+      ),
+      info = RecordInfo(
+        pitch = pitch,
+        name = name,
+        company = company,
+        companyCreation = new DateTime(companyCreation),
+        companyWebsite = companyWebsite,
+        email = email,
+        phone = phone,
+        twitter = twitter,
+        angelco = angelco,
+        presentationUrl = presentationUrl,
+        amount = amount
+      )
     )
   }
   def unapplyToDAL(record: Record): Option[(
@@ -110,12 +96,12 @@ object Record {
   )] = {
     Some(
       record.id, new Timestamp(record.date.getMillis),
-      record.partners, record.activities, record.resources, record.propositions,
-      record.customerRelationships, record.channels, record.customerSegments,
-      record.costStructure, record.revenueStreams,
-      record.pitch, record.name, record.company, new Timestamp(record.companyCreation.getMillis),
-      record.companyWebsite, record.email, record.phone, record.twitter,
-      record.angelco, record.presentationUrl, record.amount
+      record.bmc.partners, record.bmc.activities, record.bmc.resources, record.bmc.propositions,
+      record.bmc.customerRelationships, record.bmc.channels, record.bmc.customerSegments,
+      record.bmc.costStructure, record.bmc.revenueStreams,
+      record.info.pitch, record.info.name, record.info.company, new Timestamp(record.info.companyCreation.getMillis),
+      record.info.companyWebsite, record.info.email, record.info.phone, record.info.twitter,
+      record.info.angelco, record.info.presentationUrl, record.info.amount
     )
   }
 
@@ -123,26 +109,30 @@ object Record {
     Record(
       id = UUID.randomUUID(),
       date = new DateTime,
-      partners = bmc.partners,
-      activities = bmc.activities,
-      resources = bmc.resources,
-      propositions = bmc.propositions,
-      customerRelationships = bmc.customerRelationships,
-      channels = bmc.channels,
-      customerSegments = bmc.customerSegments,
-      costStructure = bmc.costStructure,
-      revenueStreams = bmc.revenueStreams,
-      pitch = info.pitch,
-      name = info.name,
-      company = info.company,
-      companyCreation = new DateTime(info.companyCreation),
-      companyWebsite = info.companyWebsite,
-      email = info.email,
-      phone = info.phone,
-      twitter = info.twitter,
-      angelco = info.angelco,
-      presentationUrl = info.presentationUrl,
-      amount = info.amount
+      bmc = RecordBMC(
+        partners = bmc.partners,
+        activities = bmc.activities,
+        resources = bmc.resources,
+        propositions = bmc.propositions,
+        customerRelationships = bmc.customerRelationships,
+        channels = bmc.channels,
+        customerSegments = bmc.customerSegments,
+        costStructure = bmc.costStructure,
+        revenueStreams = bmc.revenueStreams
+      ),
+      info = RecordInfo(
+        pitch = info.pitch,
+        name = info.name,
+        company = info.company,
+        companyCreation = new DateTime(info.companyCreation),
+        companyWebsite = info.companyWebsite,
+        email = info.email,
+        phone = info.phone,
+        twitter = info.twitter,
+        angelco = info.angelco,
+        presentationUrl = info.presentationUrl,
+        amount = info.amount
+      )
     )
   }
 

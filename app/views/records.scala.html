@@ -30,26 +30,26 @@
   <tbody>
     @for(r <- records) {
       <tr data-uuid="@r.id">
-        <td>@{r.partners}</td>
-        <td>@{r.activities}</td>
-        <td>@{r.resources}</td>
-        <td>@{r.propositions}</td>
-        <td>@{r.customerRelationships}</td>
-        <td>@{r.channels}</td>
-        <td>@{r.customerSegments}</td>
-        <td>@{r.costStructure}</td>
-        <td>@{r.revenueStreams}</td>
-        <td>@{r.pitch}</td>
-        <td>@{r.name}</td>
-        <td>@{r.company}</td>
-        <td>@{r.companyCreation}</td>
-        <td>@{r.companyWebsite}</td>
-        <td>@{r.email}</td>
-        <td>@{r.phone}</td>
-        <td>@{r.twitter}</td>
-        <td>@{r.angelco}</td>
-        <td>@{r.presentationUrl}</td>
-        <td>@{r.amount}</td>
+        <td>@{r.bmc.partners}</td>
+        <td>@{r.bmc.activities}</td>
+        <td>@{r.bmc.resources}</td>
+        <td>@{r.bmc.propositions}</td>
+        <td>@{r.bmc.customerRelationships}</td>
+        <td>@{r.bmc.channels}</td>
+        <td>@{r.bmc.customerSegments}</td>
+        <td>@{r.bmc.costStructure}</td>
+        <td>@{r.bmc.revenueStreams}</td>
+        <td>@{r.info.pitch}</td>
+        <td>@{r.info.name}</td>
+        <td>@{r.info.company}</td>
+        <td>@{r.info.companyCreation}</td>
+        <td>@{r.info.companyWebsite}</td>
+        <td>@{r.info.email}</td>
+        <td>@{r.info.phone}</td>
+        <td>@{r.info.twitter}</td>
+        <td>@{r.info.angelco}</td>
+        <td>@{r.info.presentationUrl}</td>
+        <td>@{r.info.amount}</td>
       </tr>
     }
   </tbody>
