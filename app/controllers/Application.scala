@@ -36,6 +36,7 @@ val formInfo = Form(mapping(
   "companyWebsite" -> text.verifying(nonEmpty),
   "email" -> email.verifying(nonEmpty),
   "phone" -> text.verifying(nonEmpty),
+  "vine" -> text.verifying(Messages("vine.invalid"), v => v.startsWith("https://vine.co/v/")),
   "twitter" -> optional(text),
   "angelco" -> optional(text),
   "presentationUrl" -> optional(text),

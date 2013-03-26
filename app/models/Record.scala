@@ -4,6 +4,7 @@ import scala.util.Try
 import org.joda.time.DateTime
 import java.sql.Timestamp
 import scala.slick.session._
+import play.api.libs.json._
 
 case class Record (
   id: UUID,
@@ -40,6 +41,7 @@ case class RecordInfo(
   companyWebsite: String,
   email: String,
   phone: String,
+  vine: String,
   twitter: Option[String],
   angelco: Option[String],
   presentationUrl: Option[String],
@@ -52,10 +54,11 @@ object Record {
     partners: String, activities: String, resources: String, propositions: String,
     customerRelationships: String, channels: String, customerSegments: String,
     costStructure: String, revenueStreams: String,
-    pitch: String, name: String, company: String, companyCreation: Timestamp,
-    companyWebsite: String, email: String, phone: String, twitter: Option[String],
-    angelco: Option[String], presentationUrl: Option[String], amount: Option[Int]
+    pitch: String, name: String, company: String, email: String, phone: String,
+    vine: String, twitter: Option[String], angelco: Option[String],
+    presentationUrl: Option[String], amount: Option[Int]
   ): Record = {
+    val companyJson = Json.parse(company)
     Record(
       id = id,
       date = new DateTime(date),
@@ -73,11 +76,14 @@ object Record {
       info = RecordInfo(
         pitch = pitch,
         name = name,
-        company = company,
-        companyCreation = new DateTime(companyCreation),
-        companyWebsite = companyWebsite,
+        company = (companyJson \ "name").asOpt[String] getOrElse "",
+        companyCreation = (companyJson \ "creation").asOpt[String] map {
+          new DateTime(_)
+        } getOrElse new DateTime,
+        companyWebsite = (companyJson \ "website").asOpt[String] getOrElse "",
         email = email,
         phone = phone,
+        vine = vine,
         twitter = twitter,
         angelco = angelco,
         presentationUrl = presentationUrl,
@@ -90,18 +96,26 @@ object Record {
     String, String, String, String,
     String, String, String,
     String, String,
-    String, String, String, Timestamp,
-    String, String, String, Option[String],
-    Option[String], Option[String], Option[Int]
+    String, String, 
+    String,
+    String, String, String,
+    Option[String], Option[String],
+    Option[String], Option[Int]
   )] = {
     Some(
       record.id, new Timestamp(record.date.getMillis),
       record.bmc.partners, record.bmc.activities, record.bmc.resources, record.bmc.propositions,
       record.bmc.customerRelationships, record.bmc.channels, record.bmc.customerSegments,
       record.bmc.costStructure, record.bmc.revenueStreams,
-      record.info.pitch, record.info.name, record.info.company, new Timestamp(record.info.companyCreation.getMillis),
-      record.info.companyWebsite, record.info.email, record.info.phone, record.info.twitter,
-      record.info.angelco, record.info.presentationUrl, record.info.amount
+      record.info.pitch, record.info.name,
+      Json.obj(
+        "name" -> record.info.company,
+        "creation" -> record.info.companyCreation.toString(),
+        "website" -> record.info.companyWebsite
+      ).toString,
+      record.info.email, record.info.phone, record.info.vine,
+      record.info.twitter, record.info.angelco,
+      record.info.presentationUrl, record.info.amount
     )
   }
 
@@ -128,6 +142,7 @@ object Record {
         companyWebsite = info.companyWebsite,
         email = info.email,
         phone = info.phone,
+        vine = info.vine,
         twitter = info.twitter,
         angelco = info.angelco,
         presentationUrl = info.presentationUrl,
@@ -165,10 +180,9 @@ trait RecordComponent {
     def pitch = column[String]("record_pitch")
     def name = column[String]("record_name")
     def company = column[String]("record_company")
-    def companyCreation = column[Timestamp]("record_company-creation")
-    def companyWebsite = column[String]("record_company-website")
     def email = column[String]("record_email")
     def phone = column[String]("record_phone")
+    def vine = column[String]("record_vine")
     def twitter = column[Option[String]]("record_twitter")
     def angelco = column[Option[String]]("record_angelco")
     def presentationUrl = column[Option[String]]("record_presentationUrl")
@@ -177,8 +191,7 @@ trait RecordComponent {
       id ~ date ~ partners ~ activities ~ resources ~ propositions ~
       customerRelationships ~ channels ~ customerSegments ~
       costStructure ~ revenueStreams ~ pitch ~ name ~ company ~
-      companyCreation ~ companyWebsite ~ email ~ phone ~ twitter ~
-      angelco ~ presentationUrl ~ amount
+      email ~ phone ~ vine ~ twitter ~ angelco ~ presentationUrl ~ amount
     ) <> (Record.applyFromDAL _, Record.unapplyToDAL _)
 
     def add(record: Record)(implicit session: Session) = {
