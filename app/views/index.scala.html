@@ -9,41 +9,42 @@
     <div class="main">@Html(Messages("presentation"))</div>
     <a href="#">@Messages("more.info")</a>
   </div>
+  <p><small>@Messages("required", "*")</small></p>
   <div class="row bmc bmc-top">
     <h4>@Messages("bmc.title")</h4>
     <div class="span2">
-      @helper.textarea(formBMC("partners"))
+      @helper.textarea(formBMC("partners"), 'required -> "required")
     </div>
     <div class="span3">
-      @helper.textarea(formBMC("activities"))
-      @helper.textarea(formBMC("resources"))
+      @helper.textarea(formBMC("activities"), 'required -> "required")
+      @helper.textarea(formBMC("resources"), 'required -> "required")
     </div>
     <div class="span2">
-      @helper.textarea(formBMC("propositions"))
+      @helper.textarea(formBMC("propositions"), 'required -> "required")
     </div>
     <div class="span3">
-      @helper.textarea(formBMC("customerRelationships"))
-      @helper.textarea(formBMC("channels"))
+      @helper.textarea(formBMC("customerRelationships"), 'required -> "required")
+      @helper.textarea(formBMC("channels"), 'required -> "required")
     </div>
     <div class="span2">
-      @helper.textarea(formBMC("customerSegments"))
+      @helper.textarea(formBMC("customerSegments"), 'required -> "required")
     </div>
   </div>
   <div class="row bmc">
-    <div class="span6">@helper.textarea(formBMC("costStructure"))</div>
-    <div class="span6">@helper.textarea(formBMC("revenueStreams"))</div>
+    <div class="span6">@helper.textarea(formBMC("costStructure"), 'required -> "required")</div>
+    <div class="span6">@helper.textarea(formBMC("revenueStreams"), 'required -> "required")</div>
   </div>
 
   <div class="row">
     <div class="span6">
-      @helper.textarea(formInfo("pitch"), 'maxlength -> "400")
-      @helper.inputText(formInfo("name"))
-      @helper.inputText(formInfo("company"))
-      @helper.inputText(formInfo("companyCreation"))
-      @helper.inputText(formInfo("companyWebsite"))
-      @helper.inputText(formInfo("email"))
-      @helper.inputText(formInfo("phone"))
-      @helper.inputText(formInfo("vine"), 'placeholder -> "https://vine.co/v/xxxxxxxx")
+      @helper.textarea(formInfo("pitch"), 'maxlength -> "400", 'required -> "required")
+      @helper.inputText(formInfo("name"), 'required -> "required")
+      @helper.inputText(formInfo("company"), 'required -> "required")
+      @helper.inputText(formInfo("companyCreation"), 'required -> "required")
+      @helper.inputText(formInfo("companyWebsite"), 'required -> "required")
+      @helper.inputText(formInfo("email"), 'required -> "required")
+      @helper.inputText(formInfo("phone"), 'required -> "required")
+      @helper.inputText(formInfo("vine"), 'placeholder -> "https://vine.co/v/xxxxxxxx", 'required -> "required")
       @helper.inputText(formInfo("twitter"), 'placeholder -> "@handle")
       @helper.inputText(formInfo("angelco"), 'placeholder -> "https://angel.co/xxxxxxxx")
       @helper.inputText(formInfo("presentationUrl"))
@@ -51,7 +52,10 @@
     </div>
   </div>
   <div class="row">
-    <div class="span12"><input class="btn btn-primary btn-large" type="submit" value="@Messages("apply")" /><div>
+    <div class="span12">
+      <p><small>@Messages("required", "*")</small><br /><br /></p>
+      <input class="btn btn-primary btn-large" type="submit" value="@Messages("apply")" />
+    <div>
   </div>
 }
 

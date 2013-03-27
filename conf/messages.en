@@ -17,10 +17,10 @@ email=E-mail
 phone=Phone
 vine=URL of your Vine video
 vine.invalid=Invalid Vine URL
-twitter=Twitter - Optional
-angelco=Angel.co page - Optional
-presentationUrl=A presentation''s URL (slideshare, …) - Optional
-amount=Amount needed (in euros) - Optional
+twitter=Twitter
+angelco=Angel.co page
+presentationUrl=A presentation''s URL (slideshare, …)
+amount=Amount needed (in euros)
 
 apply=Apply
 
@@ -32,3 +32,4 @@ title=Web2Day 2013 - Startup Contest - Application
 presentation=<p>Pour la 5ème édition du <a href="http://www.web2day-nantes.org">Web2Day</a>, le startup contest 2013 est organisé le jeudi 16 mai en collaboration avec le <a href="http://www.companycamp.us">Company Campus</a>. Le “self incubateur” du Quartier de la Création à Nantes met à disposition d’<a href="http://www.atlantic2.org">Atlantic 2.0</a> son savoir-faire pour proposer aux startupers un moment privilégié auprès d’investisseurs venus pour l’occasion.</p><p>Comment faire pour venir pitcher au Web2day ? C’est simple, il suffit de remplir le formulaire ci-dessous avant le 29 avril. Afin de cerner au mieux vos besoins, il se compose d’un Business Model Canvas, d’un pitch de 400 signes maximum et d’une vidéo Vine.</p><p>Pour permettre à un maximum de startups de présenter leur projet devant les investisseurs, nous nous efforçons d’ouvrir au maximum le nombre de places. Cette année, 40 startups pourront pitcher durant le web2day pour gagner leur place en finale.</p><p>Une place gratuite est offerte aux startupers qui seront sélectionnés.</p>
 
 more.info=More information
+required={0}: Required

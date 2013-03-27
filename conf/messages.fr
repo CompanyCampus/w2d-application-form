@@ -1,26 +1,26 @@
 bmc.title=Business Model Canvas à remplir
-partners=Partenaires
-activities=Activités
-resources=Ressources
-propositions=Offre
-customerRelationships=Relation Client
-channels=Canaux de Distribution
-customerSegments=Segments Client
-costStructure=Structure des Coûts
-revenueStreams=Sources de Revenus
-pitch=Pitch (maximum 400 signes)
-name=Nom
-company=Entreprise
-companyCreation=Date de création de l''entreprise
-companyWebsite=Site web de l''entreprise
-email=E-mail
-phone=Téléphone
-vine=URL de votre vidéo Vine
+partners=Partenaires*
+activities=Activités*
+resources=Ressources*
+propositions=Offre*
+customerRelationships=Relation Client*
+channels=Canaux de Distribution*
+customerSegments=Segments Client*
+costStructure=Structure des Coûts*
+revenueStreams=Sources de Revenus*
+pitch=Pitch* (maximum 400 signes)
+name=Nom*
+company=Entreprise*
+companyCreation=Date de création de l''entreprise*
+companyWebsite=Site web de l''entreprise*
+email=E-mail*
+phone=Téléphone*
+vine=URL de votre vidéo Vine*
 vine.invalid=URL Vine non valide
-twitter=Twitter - Facultatif
-angelco=Page Angel.co - Facultatif
-presentationUrl=URL d''une présentation (slideshare, …) - Facultatif
-amount=Montant nécessaire (en euros) - Facultatif
+twitter=Twitter
+angelco=Page Angel.co
+presentationUrl=URL d''une présentation (slideshare, …)
+amount=Montant nécessaire (en euros)
 
 apply=Soumettre votre candidature
 
@@ -32,3 +32,4 @@ title=Web2Day 2013 - Startup Contest - Candidature
 presentation=<p>Pour la 5ème édition du <a href="http://www.web2day-nantes.org">Web2Day</a>, le startup contest 2013 est organisé le jeudi 16 mai en collaboration avec le <a href="http://www.companycamp.us">Company Campus</a>. Le “self incubateur” du Quartier de la Création à Nantes met à disposition d’<a href="http://www.atlantic2.org">Atlantic 2.0</a> son savoir-faire pour proposer aux startupers un moment privilégié auprès d’investisseurs venus pour l’occasion.</p><p>Comment faire pour venir pitcher au Web2day ? C’est simple, il suffit de remplir le formulaire ci-dessous avant le 29 avril. Afin de cerner au mieux vos besoins, il se compose d’un Business Model Canvas, d’un pitch de 400 signes maximum et d’une vidéo Vine.</p><p>Pour permettre à un maximum de startups de présenter leur projet devant les investisseurs, nous nous efforçons d’ouvrir au maximum le nombre de places. Cette année, 40 startups pourront pitcher durant le web2day pour gagner leur place en finale.</p><p>Une place gratuite est offerte aux startupers qui seront sélectionnés.</p>
 
 more.info=Plus d''informations
+required={0} : Requis
