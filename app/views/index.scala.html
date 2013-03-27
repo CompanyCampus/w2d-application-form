@@ -1,10 +1,17 @@
-@(formBMC: Form[RecordBMC], formInfo: Form[RecordInfo])
+@(formBMC: Form[RecordBMC], formInfo: Form[RecordInfo])(implicit request: Request[AnyContent], lang: Lang)
 @import helper.twitterBootstrap._
 
-@main("web2day Application Form") {
+@main(Messages("title")) {
 
-<h1>web2day Application Form</h1>
+<h1>@Messages("title")</h1>
 @helper.form(action = routes.Application.addRecord) {
+  <div class="presentation">
+    <div class="main">@Html(Messages("presentation"))</div>
+    <div class="more">
+      <a href="#" class="show">@Messages("read.more")</a>
+      <div class="content">@Html(Messages("presentation.more"))</div>
+    </div>
+  </div>
   <div class="row bmc bmc-top">
     <div class="span2">
       @helper.textarea(formBMC("partners"))
@@ -31,7 +38,7 @@
 
   <div class="row">
     <div class="span6">
-      @helper.textarea(formInfo("pitch"))
+      @helper.textarea(formInfo("pitch"), 'maxlength -> "400")
       @helper.inputText(formInfo("name"))
       @helper.inputText(formInfo("company"))
       @helper.inputText(formInfo("companyCreation"))
@@ -39,14 +46,14 @@
       @helper.inputText(formInfo("email"))
       @helper.inputText(formInfo("phone"))
       @helper.inputText(formInfo("vine"), 'placeholder -> "https://vine.co/v/xxxxxxxx")
-      @helper.inputText(formInfo("twitter"))
-      @helper.inputText(formInfo("angelco"))
+      @helper.inputText(formInfo("twitter"), 'placeholder -> "@handle")
+      @helper.inputText(formInfo("angelco"), 'placeholder -> "https://angel.co/xxxxxxxx")
       @helper.inputText(formInfo("presentationUrl"))
       @helper.inputText(formInfo("amount"))
     </div>
   </div>
   <div class="row">
-    <div class="span12"><input class="btn btn-primary" type="submit" value="@Messages("apply")" /><div>
+    <div class="span12"><input class="btn btn-primary btn-large" type="submit" value="@Messages("apply")" /><div>
   </div>
 }
 

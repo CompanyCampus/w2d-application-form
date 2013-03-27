@@ -1,3 +1,12 @@
+.presentation {
+  max-width: 600px;
+  margin: 40px 0;
+}
+
+.presentation .more .content {
+  display: none;
+}
+
 textarea, input[type=text] {
   width: 100%;
 }

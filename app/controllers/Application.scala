@@ -29,16 +29,22 @@ val formBMC = Form(mapping(
   "revenueStreams" -> text.verifying(nonEmpty)
 )(RecordBMC.apply)(RecordBMC.unapply))
 val formInfo = Form(mapping(
-  "pitch" -> text.verifying(nonEmpty),
+  "pitch" -> text.verifying(minLength(1), maxLength(400)),
   "name" -> text.verifying(nonEmpty),
   "company" -> text.verifying(nonEmpty),
   "companyCreation" -> jodaDate("yyyy-MM-dd"),
   "companyWebsite" -> text.verifying(nonEmpty),
   "email" -> email.verifying(nonEmpty),
   "phone" -> text.verifying(nonEmpty),
-  "vine" -> text.verifying(Messages("vine.invalid"), v => v.startsWith("https://vine.co/v/")),
+  "vine" -> text.verifying(
+    Messages("vine.invalid"),
+    v => v.startsWith("https://vine.co/v/")
+  ),
   "twitter" -> optional(text),
-  "angelco" -> optional(text),
+  "angelco" -> optional(text.verifying(
+    Messages("angelco.invalid"),
+    a => a.startsWith("https://angel.co/")
+  )),
   "presentationUrl" -> optional(text),
   "amount" -> optional(number)
 )(RecordInfo.apply)(RecordInfo.unapply))

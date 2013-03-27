@@ -1,35 +1,35 @@
-partners=Partenaires
-activities=Activités
-resources=Ressources
-propositions=Offre
-customerRelationships=Relation Client
-channels=Canaux de Distribution
-customerSegments=Segments Client
-costStructure=Structure des Coûts
-revenueStreams=Sources de Revenus
-pitch=Pitch (maximum 400 signes)
-name=Nom
-company=Entreprise
-companyCreation=Date de création de l''entreprise
-companyWebsite=Site web de l''entreprise
+partners=Key Partners
+activities=Key Activities
+resources=Key Resources
+propositions=Value Propositions
+customerRelationships=Customer Relationships
+channels=Channels
+customerSegments=Customer Segments
+costStructure=Cost Structure
+revenueStreams=Revenue Streams
+pitch=Pitch (maximum length: 400)
+name=Name
+company=Company
+companyCreation=Company''s creation date
+companyWebsite=Company''s website
 email=E-mail
-phone=Téléphone
-vine=URL de votre vidéo Vine
-vine.invalid=URL Vine non valide
-twitter=Twitter - Facultatif
-angelco=Page Angel.co - Facultatif
-presentationUrl=URL d''une présentation (slideshare, …) - Facultatif
-amount=Montant nécessaire (en euros) - Facultatif
+phone=Phone
+vine=URL of your Vine video
+vine.invalid=Invalid Vine URL
+twitter=Twitter - Optional
+angelco=Angel.co page - Optional
+presentationUrl=A presentation''s URL (slideshare, …) - Optional
+amount=Amount needed (in euros) - Optional
 
-apply=Soumettre votre candidature
+apply=Apply
 
-record.saved=Nous avons bien reçu votre candidature
-record.error=Oups, nous avons rencontré un problème. Merci de réessayer.
+record.saved=We''ve got your application!
+record.error=Oops, something wrong happened on our end. Try again?
 
-title=Web2Day 2013 - Startup Contest - Candidature
+title=Web2Day 2013 - Startup Contest - Application
 
 presentation=<p>Pour la 5ème édition du <a href="http://www.web2day-nantes.org">Web2Day</a>, le startup contest 2013 est organisé en collaboration avec le <a href="http://www.companycamp.us">Company Campus</a>. Le “self incubateur” du Quartier de la Création à Nantes met à disposition d’<a href="http://www.atlantic2.org">Atlantic 2.0</a> son savoir-faire pour proposer aux startupers un moment privilégié auprès d’investisseurs venus pour l’occasion.</p><p>Comment faire pour venir pitcher au Web2day ? C’est simple, il suffit de remplir le formulaire ci-dessous avant le 29 avril. Afin de cerner au mieux vos besoins, il se compose d’un Business Model Canvas, d’un pitch de 400 signes maximum et d’une vidéo <a href="http://www.vine.co">Vine</a>.</p>
 
 presentation.more=<p>Pour permettre à un maximum de startups de présenter leur projet devant les investisseurs, nous nous efforçons d’ouvrir au maximum le nombre de places. Cette année, 40 startups pourront pitcher durant le web2day pour gagner leur place en finale.</p><p>Une place gratuite est offerte aux startupers qui seront sélectionnés. Le Startup Contest se déroule sur la journée du jeudi 16 mai.</p>
 
-read.more=Lire la suite
+read.more=Read more
