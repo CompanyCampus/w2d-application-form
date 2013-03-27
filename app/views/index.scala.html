@@ -40,7 +40,7 @@
       @helper.textarea(formInfo("pitch"), 'maxlength -> "400", 'required -> "required")
       @helper.inputText(formInfo("name"), 'required -> "required")
       @helper.inputText(formInfo("company"), 'required -> "required")
-      @helper.inputText(formInfo("companyCreation"), 'required -> "required")
+      @helper.inputText(formInfo("companyCreation"), 'required -> "required", 'placeholder -> Messages("date.format"))
       @helper.inputText(formInfo("companyWebsite"), 'required -> "required")
       @helper.inputText(formInfo("email"), 'required -> "required")
       @helper.inputText(formInfo("phone"), 'required -> "required")
