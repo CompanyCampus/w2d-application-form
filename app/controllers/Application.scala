@@ -50,7 +50,11 @@ val formInfo = Form(mapping(
 )(RecordInfo.apply)(RecordInfo.unapply))
 
   def index = Action { implicit request =>
-    Ok(views.html.index(formBMC, formInfo))
+    Ok(views.html.index(
+      formBMC, formInfo
+    )(
+      request, request.getQueryString("lang") map { Lang(_) } getOrElse lang
+    ))
   }
 
   def addRecord = Action { implicit request =>
