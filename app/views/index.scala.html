@@ -10,6 +10,20 @@
     <a href="#">@Messages("more.info")</a>
   </div>
   <p><small>@Messages("required", "*")</small></p>
+  <div class="row">
+    <div class="span6">
+      @helper.inputText(formInfo("name"), 'required -> "required")
+      @helper.inputText(formInfo("company"), 'required -> "required")
+      @helper.inputText(formInfo("companyCreation"), 'required -> "required", 'placeholder -> Messages("date.format"))
+      @helper.inputText(formInfo("companyWebsite"), 'required -> "required")
+    </div>
+    <div class="span6">
+      @helper.inputText(formInfo("email"), 'required -> "required")
+      @helper.inputText(formInfo("phone"), 'required -> "required")
+      @helper.inputText(formInfo("vine"), 'placeholder -> "https://vine.co/v/xxxxxxxx", 'required -> "required")
+      @helper.inputText(formInfo("twitter"), 'placeholder -> "@handle")
+    </div>
+  </div>
   <div class="span12">
     <h4>@Messages("bmc.title")</h4>
     <small><a href="http://www.businessmodelgeneration.com/canvas">@Messages("what.is.it")</a></small>
@@ -41,14 +55,6 @@
   <div class="row">
     <div class="span6">
       @helper.textarea(formInfo("pitch"), 'maxlength -> "400", 'required -> "required")
-      @helper.inputText(formInfo("name"), 'required -> "required")
-      @helper.inputText(formInfo("company"), 'required -> "required")
-      @helper.inputText(formInfo("companyCreation"), 'required -> "required", 'placeholder -> Messages("date.format"))
-      @helper.inputText(formInfo("companyWebsite"), 'required -> "required")
-      @helper.inputText(formInfo("email"), 'required -> "required")
-      @helper.inputText(formInfo("phone"), 'required -> "required")
-      @helper.inputText(formInfo("vine"), 'placeholder -> "https://vine.co/v/xxxxxxxx", 'required -> "required")
-      @helper.inputText(formInfo("twitter"), 'placeholder -> "@handle")
       @helper.inputText(formInfo("angelco"), 'placeholder -> "https://angel.co/xxxxxxxx")
       @helper.inputText(formInfo("presentationUrl"))
       @helper.inputText(formInfo("amount"))
