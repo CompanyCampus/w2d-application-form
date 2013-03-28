@@ -54,3 +54,10 @@ textarea {
 .bmc-top .span3 textarea {
   height: 100%;
 }
+
+.bmc i {
+  float: right;
+  position: relative;
+  top: 35px;
+  font-size: 1.3em;
+}

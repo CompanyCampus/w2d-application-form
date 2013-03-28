@@ -30,26 +30,39 @@
   </div>
   <div class="row bmc bmc-top">
     <div class="span2">
+      <i class="icon-group"></i>
       @helper.textarea(formBMC("partners"), 'required -> "required")
     </div>
     <div class="span3">
+      <i class="icon-cogs"></i>
       @helper.textarea(formBMC("activities"), 'required -> "required")
+      <i class="icon-reorder"></i>
       @helper.textarea(formBMC("resources"), 'required -> "required")
     </div>
     <div class="span2">
+      <i class="icon-gift"></i>
       @helper.textarea(formBMC("propositions"), 'required -> "required")
     </div>
     <div class="span3">
+      <i class="icon-heart"></i>
       @helper.textarea(formBMC("customerRelationships"), 'required -> "required")
+      <i class="icon-plane"></i>
       @helper.textarea(formBMC("channels"), 'required -> "required")
     </div>
     <div class="span2">
+      <i class="icon-user"></i>
       @helper.textarea(formBMC("customerSegments"), 'required -> "required")
     </div>
   </div>
   <div class="row bmc">
-    <div class="span6">@helper.textarea(formBMC("costStructure"), 'required -> "required")</div>
-    <div class="span6">@helper.textarea(formBMC("revenueStreams"), 'required -> "required")</div>
+    <div class="span6">
+      <i class="icon-book"></i>
+      @helper.textarea(formBMC("costStructure"), 'required -> "required")
+    </div>
+    <div class="span6">
+      <i class="icon-exchange"></i>
+      @helper.textarea(formBMC("revenueStreams"), 'required -> "required")
+    </div>
   </div>
 
   <div class="row">
