@@ -10,8 +10,11 @@
     <a href="#">@Messages("more.info")</a>
   </div>
   <p><small>@Messages("required", "*")</small></p>
-  <div class="row bmc bmc-top">
+  <div class="span12">
     <h4>@Messages("bmc.title")</h4>
+    <small><a href="http://www.businessmodelgeneration.com/canvas">@Messages("what.is.it")</a></small>
+  </div>
+  <div class="row bmc bmc-top">
     <div class="span2">
       @helper.textarea(formBMC("partners"), 'required -> "required")
     </div>

@@ -34,3 +34,4 @@ presentation=<p>Pour la 5ème édition du <a href="http://www.web2day-nantes.org
 more.info=Plus d''informations
 required={0} : Requis
 date.format=aaaa-mm-jj (ex : 2013-03-27)
+what.is.it=Qu''est-ce que c'est ?
