@@ -20,7 +20,7 @@ vine.invalid=URL Vine non valide
 twitter=Twitter
 angelco=Page Angel.co
 presentationUrl=URL d''une présentation (slideshare, …)
-amount=Montant recherché (en euros)
+amount=Montant recherché en € (pour catégoriser les demandes en fourchettes)
 
 apply=Soumettre votre candidature
 
