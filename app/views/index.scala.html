@@ -68,6 +68,7 @@
   <div class="row">
     <div class="span6">
       @helper.textarea(formInfo("pitch"), 'maxlength -> "400", 'required -> "required")
+      <span class="pitch-chars-count">400</span>
       @helper.inputText(formInfo("angelco"), 'placeholder -> "https://angel.co/xxxxxxxx")
       @helper.inputText(formInfo("presentationUrl"))
       @helper.inputText(formInfo("amount"))
