@@ -31,12 +31,32 @@ textarea {
   display: none;
 }
 
+.bmc-title {
+  margin-bottom: 20px;
+  margin-left: 0;
+}
+
+.bmc .clearfix {
+  position: relative;
+}
+
+.bmc-top .input {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
 .bmc label {
   position: relative;
-  top: 30px;
+  top: 35px;
   left: 5px;
   font-size: 1.3em;
   color: #555;
+}
+
+.bmc-top label {
+  top: 4px;
+  z-index: 1;
 }
 
 .bmc textarea {
@@ -72,6 +92,17 @@ textarea {
   position: relative;
   top: 35px;
   font-size: 1.3em;
+  z-index: 5;
+}
+
+.bmc-top i {
+  top: 5px;
+  right: -5px;
+}
+
+.bmc-bottom {
+  position: relative;
+  top: -25px;
 }
 
 textarea#pitch {
@@ -126,6 +157,16 @@ textarea:focus, input[type=text]:focus {
 
 .confirmation > * {
   margin: 0 auto;
+}
+
+@media screen and (max-width: 1200px) {
+  .bmc textarea {
+    padding-top: 45px;
+  }
+
+  .bmc-bottom {
+    top: -20px;
+  }
 }
 
 @media screen and (max-width: 600px) {
