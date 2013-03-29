@@ -5,6 +5,10 @@ body {
 a {
   color: #FF8E1F;
 }
+a:hover {
+  color: #A6570A;
+  text-decoration: none;
+}
 
 .presentation {
   max-width: 600px;
