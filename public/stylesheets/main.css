@@ -185,3 +185,7 @@ textarea:focus, input[type=text]:focus {
     border: none;
   }
 }
+
+#ui-datepicker-div {
+  z-index: 10 !important;
+}

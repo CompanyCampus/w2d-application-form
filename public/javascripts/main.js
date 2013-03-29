@@ -10,7 +10,6 @@ var Main = {
       maxDate: 0,
       minDate: "-10Y"
     });
-    $("#companyCreation").datepicker("option", "dateFormat", "yy-mm-dd");
     $("#pitch").keyup(function() {
       $(".pitch-chars-count").text(400 - $(this).val().length);
     })
