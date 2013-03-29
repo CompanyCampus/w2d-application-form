@@ -4,7 +4,7 @@
 @main(Messages("title")) {
 
 <h1>@Messages("title")</h1>
-@helper.form(action = routes.Application.addRecord) {
+<form action="/records?lang=@lang.code" method="POST">
   <div class="presentation">
     <div class="main">@Html(Messages("presentation"))</div>
     <a href="#">@Messages("more.info")</a>
@@ -80,6 +80,6 @@
       <input class="btn btn-primary btn-large" type="submit" value="@Messages("apply")" />
     <div>
   </div>
-}
+</form>
 
 }

@@ -1,0 +1,10 @@
+@()(implicit request: Request[AnyContent], lang: Lang)
+
+@main(Messages("title")) {
+  <div class="confirmation">
+    <p>@Html(Messages("confirmation"))<br /></p>
+    <div><a href="http://www.web2day-nantes.org" class="btn btn-large btn-primary">
+      @Messages("back.to.W2D")
+    </a></div>
+  </div>
+}

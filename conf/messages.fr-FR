@@ -24,8 +24,9 @@ amount=Montant recherché en € (pour catégoriser les demandes en fourchettes)
 
 apply=Soumettre votre candidature
 
-record.saved=Nous avons bien reçu votre candidature
 record.error=Oups, nous avons rencontré un problème. Merci de réessayer.
+confirmation=Félicitations, votre inscription a bien été prise en compte.<br />Nous allons revenir vers vous.
+back.to.W2D=Revenir sur le site du Web2Day
 
 title=Web2Day 2013 - Startup Contest - Candidature
 

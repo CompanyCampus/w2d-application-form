@@ -24,8 +24,9 @@ amount=Amount you are looking for in € (for us to categorize applications in r
 
 apply=Apply
 
-record.saved=We''ve got your application!
 record.error=Oops, something wrong happened on our end. Try again?
+confirmation=Congratulations, your application is saved.<br />We will get back to you.
+back.to.W2D=Back to the Web2Day website
 
 title=Web2Day 2013 - Startup Contest - Application
 
