@@ -1,0 +1,67 @@
+@(formBMC: Form[RecordBMC], formInfo: Form[RecordInfo])(implicit request: Request[AnyContent], lang: Lang)
+@import helper.twitterBootstrap._
+
+<div class="row">
+  <div class="span6">
+    @helper.inputText(formInfo("name"), 'required -> "required")
+    @helper.inputText(formInfo("company"), 'required -> "required")
+    @helper.inputText(formInfo("companyCreation"), 'required -> "required", 'placeholder -> Messages("date.format"))
+    @helper.inputText(formInfo("companyWebsite"), 'required -> "required")
+  </div>
+  <div class="span6">
+    @helper.inputText(formInfo("email"), 'required -> "required")
+    @helper.inputText(formInfo("phone"), 'required -> "required")
+    @helper.inputText(formInfo("vine"), 'placeholder -> "https://vine.co/v/xxxxxxxx", 'required -> "required")
+    @helper.inputText(formInfo("twitter"), 'placeholder -> "@handle")
+  </div>
+</div>
+<div class="span12 bmc-title">
+  <h4>@Messages("bmc.title")</h4>
+  <small><a href="http://www.businessmodelgeneration.com/canvas">@Messages("what.is.it")</a></small>
+</div>
+<div class="row bmc bmc-top">
+  <div class="span2">
+    <i class="icon-group"></i>
+    @helper.textarea(formBMC("partners"), 'required -> "required")
+  </div>
+  <div class="span3">
+    <i class="icon-cogs"></i>
+    @helper.textarea(formBMC("activities"), 'required -> "required")
+    <i class="icon-reorder"></i>
+    @helper.textarea(formBMC("resources"), 'required -> "required")
+  </div>
+  <div class="span2">
+    <i class="icon-gift"></i>
+    @helper.textarea(formBMC("propositions"), 'required -> "required")
+  </div>
+  <div class="span3">
+    <i class="icon-heart"></i>
+    @helper.textarea(formBMC("customerRelationships"), 'required -> "required")
+    <i class="icon-plane"></i>
+    @helper.textarea(formBMC("channels"), 'required -> "required")
+  </div>
+  <div class="span2">
+    <i class="icon-user"></i>
+    @helper.textarea(formBMC("customerSegments"), 'required -> "required")
+  </div>
+</div>
+<div class="row bmc bmc-bottom">
+  <div class="span6">
+    <i class="icon-book"></i>
+    @helper.textarea(formBMC("costStructure"), 'required -> "required")
+  </div>
+  <div class="span6">
+    <i class="icon-exchange"></i>
+    @helper.textarea(formBMC("revenueStreams"), 'required -> "required")
+  </div>
+</div>
+
+<div class="row">
+  <div class="span6">
+    @helper.textarea(formInfo("pitch"), 'maxlength -> "400", 'required -> "required")
+    <span class="pitch-chars-count">400</span>
+    @helper.inputText(formInfo("angelco"), 'placeholder -> "https://angel.co/xxxxxxxx")
+    @helper.inputText(formInfo("presentationUrl"))
+    @helper.inputText(formInfo("amount"))
+  </div>
+</div>
