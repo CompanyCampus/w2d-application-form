@@ -1,71 +1,9 @@
-@(record: models.Record)
+@(formBMC: Form[RecordBMC], formInfo: Form[RecordInfo])(implicit request: Request[AnyContent])
 
-@main("web2day Application") {
+@main("Web2Day Application") {
 
-<h1>web2day Application</h1>
+<h1>Web2Day Application</h1>
 
-<h3>@Messages("partners")</h3>
-<p>@{record.bmc.partners}</p>
-
-<h3>@Messages("activities")</h3>
-<p>@{record.bmc.activities}</p>
-
-<h3>@Messages("resources")</h3>
-<p>@{record.bmc.resources}</p>
-
-<h3>@Messages("propositions")</h3>
-<p>@{record.bmc.propositions}</p>
-
-<h3>@Messages("customerRelationships")</h3>
-<p>@{record.bmc.customerRelationships}</p>
-
-<h3>@Messages("channels")</h3>
-<p>@{record.bmc.channels}</p>
-
-<h3>@Messages("customerSegments")</h3>
-<p>@{record.bmc.customerSegments}</p>
-
-<h3>@Messages("costStructure")</h3>
-<p>@{record.bmc.costStructure}</p>
-
-<h3>@Messages("revenueStreams")</h3>
-<p>@{record.bmc.revenueStreams}</p>
-
-<h3>@Messages("pitch")</h3>
-<p>@{record.info.pitch}</p>
-
-<h3>@Messages("name")</h3>
-<p>@{record.info.name}</p>
-
-<h3>@Messages("company")</h3>
-<p>@{record.info.company}</p>
-
-<h3>@Messages("companyCreation")</h3>
-<p>@{record.info.companyCreation}</p>
-
-<h3>@Messages("companyWebsite")</h3>
-<p>@{record.info.companyWebsite}</p>
-
-<h3>@Messages("email")</h3>
-<p>@{record.info.email}</p>
-
-<h3>@Messages("phone")</h3>
-<p>@{record.info.phone}</p>
-
-<h3>@Messages("vine")</h3>
-<p><a href="@{record.info.vine}">@{record.info.vine}</a></p>
-
-<h3>@Messages("twitter")</h3>
-<p>@{record.info.twitter getOrElse ""}</p>
-
-<h3>@Messages("angelco")</h3>
-<p>@{record.info.angelco getOrElse ""}</p>
-
-<h3>@Messages("presentationUrl")</h3>
-<p>@{record.info.presentationUrl getOrElse ""}</p>
-
-<h3>@Messages("amount")</h3>
-<p>@{record.info.amount getOrElse 0}</p>
-
+@form(formBMC, formInfo)
 
 }

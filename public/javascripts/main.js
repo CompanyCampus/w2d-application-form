@@ -13,5 +13,8 @@ var Main = {
     $("#pitch").keyup(function() {
       $(".pitch-chars-count").text(400 - $(this).val().length);
     })
+    if(window.location.pathname.indexOf("/records/") == 0) {
+      $("input,textarea").attr("disabled", "disabled");
+    }
   }
 };

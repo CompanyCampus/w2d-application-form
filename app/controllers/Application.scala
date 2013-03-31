@@ -108,7 +108,10 @@ val formInfo = Form(mapping(
   def record(id: UUID) = Authenticated { username =>
     Action { implicit request =>
       Record.get(id) map { r =>
-        Ok(views.html.record(r))
+        Ok(views.html.record(
+          formBMC.fill(r.bmc),
+          formInfo.fill(r.info)
+        ))
       } getOrElse BadRequest
     }
   }
