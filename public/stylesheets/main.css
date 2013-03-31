@@ -32,7 +32,7 @@ a:hover {
   margin: 50px auto;
 }
 
-textarea, input[type=text] {
+textarea, input[type=text], input[type=password] {
   width: 100%;
 }
 
@@ -201,4 +201,8 @@ textarea:focus, input[type=text]:focus {
 
 #ui-datepicker-div {
   z-index: 10 !important;
+}
+
+tbody tr {
+  cursor: pointer;
 }

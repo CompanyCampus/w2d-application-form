@@ -9,7 +9,7 @@
   </div>
   <div class="span12">
     <h2>Login</h2>
-    @helper.form(action = routes.Application.authenticate, 'class -> "form-horizontal") {
+    @helper.form(action = routes.Application.authenticate, 'class -> "form-horizontal span3") {
 
       @for(error <- loginForm.globalErrors) {
         <p>@error.message</p>

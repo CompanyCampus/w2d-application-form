@@ -1,6 +1,6 @@
 var Main = {
   init: function() {
-    $("tr").click(function(e) {
+    $("tbody tr").click(function(e) {
       window.location = "/records/" + e.currentTarget.dataset.uuid;
     });
     $("#companyCreation").datepicker({

@@ -6,16 +6,6 @@
 
 <table class="table table-hover">
   <thead><tr>
-    <th>@Messages("partners")</th>
-    <th>@Messages("activities")</th>
-    <th>@Messages("resources")</th>
-    <th>@Messages("propositions")</th>
-    <th>@Messages("customerRelationships")</th>
-    <th>@Messages("channels")</th>
-    <th>@Messages("customerSegments")</th>
-    <th>@Messages("costStructure")</th>
-    <th>@Messages("revenueStreams")</th>
-    <th>@Messages("pitch")</th>
     <th>@Messages("name")</th>
     <th>@Messages("company")</th>
     <th>@Messages("companyCreation")</th>
@@ -31,19 +21,9 @@
   <tbody>
     @for(r <- records) {
       <tr data-uuid="@r.id">
-        <td>@{r.bmc.partners}</td>
-        <td>@{r.bmc.activities}</td>
-        <td>@{r.bmc.resources}</td>
-        <td>@{r.bmc.propositions}</td>
-        <td>@{r.bmc.customerRelationships}</td>
-        <td>@{r.bmc.channels}</td>
-        <td>@{r.bmc.customerSegments}</td>
-        <td>@{r.bmc.costStructure}</td>
-        <td>@{r.bmc.revenueStreams}</td>
-        <td>@{r.info.pitch}</td>
         <td>@{r.info.name}</td>
         <td>@{r.info.company}</td>
-        <td>@{r.info.companyCreation}</td>
+        <td>@{r.info.companyCreation.toString("yyyy-MM-dd")}</td>
         <td>@{r.info.companyWebsite}</td>
         <td>@{r.info.email}</td>
         <td>@{r.info.phone}</td>
