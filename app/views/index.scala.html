@@ -5,9 +5,14 @@
 
 <h1>@Messages("title")</h1>
 <form action="/records?lang=@lang.code" method="POST">
-  <div class="presentation">
-    <div class="main">@Html(Messages("presentation"))</div>
-    <a href="#">@Messages("more.info")</a>
+  <div class="row introduction">
+    <div class="presentation span6">
+      <div class="main">@Html(Messages("presentation"))</div>
+      <a href="#">@Messages("more.info")</a>
+    </div>
+    <div class="span6">
+      <div class="web2day-logo"></div>
+    </div>
   </div>
   <p><small>@Messages("required", "*")</small></p>
   <div class="row">
