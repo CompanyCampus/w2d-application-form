@@ -16,5 +16,8 @@ var Main = {
     if(window.location.pathname.indexOf("/records/") == 0) {
       $("input,textarea").attr("disabled", "disabled");
     }
+    if(window.location.pathname == "/records") {
+      $("#error-modal").modal("show");
+    }
   }
 };

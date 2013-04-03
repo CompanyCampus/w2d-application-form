@@ -61,7 +61,9 @@ val formInfo = Form(mapping(
     val bmc = formBMC.bindFromRequest
     val info =  formInfo.bindFromRequest
     if(bmc.hasErrors || info.hasErrors) {
-      BadRequest(views.html.index(bmc, info))
+      BadRequest(views.html.index(bmc, info)(
+        request, request.getQueryString("lang") map { Lang(_) } getOrElse lang
+      ))
     } else {
       Record.create(bmc.get, info.get).save match { // Fuck this shit
         case Success(r) => Ok(

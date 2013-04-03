@@ -38,3 +38,7 @@ required={0}: Required
 date.format=yyyy-mm-dd (ex: 2013-03-27)
 what.is.it=What is it?
 info.publication=These informations will stay confidential
+
+error.title=Error
+error.content=We found some errors in your application. Please check what you typed, you will find error messages below fields with errors.
+error.close=Got it!

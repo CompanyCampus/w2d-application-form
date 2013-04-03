@@ -25,4 +25,16 @@
   </div>
 </form>
 
+<div id="error-modal" class="modal hide fade" tabindex="-1" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>@Messages("error.title")</h3>
+  </div>
+  <div class="modal-body">
+    @Messages("error.content")
+  </div>
+  <div class="modal-footer">
+    <button href="#" class="btn btn-primary" data-dismiss="modal">@Messages("error.close")</button>
+  </div>
+</div>
 }

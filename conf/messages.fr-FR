@@ -38,3 +38,7 @@ required={0} : Requis
 date.format=aaaa-mm-jj (ex : 2013-03-27)
 what.is.it=Qu''est-ce que c''est ?
 info.publication=Toutes les informations de ce formulaire resteront confidentielles
+
+error.title=Erreur
+error.content=Il y a des erreurs dans le formulaire. Merci de vérifier ce que vous avez entré, vous trouverez un message d''erreur en-dessous des champs qui posent problème.
+error.close=Fermer
