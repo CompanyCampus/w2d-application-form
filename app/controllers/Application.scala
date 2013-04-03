@@ -54,8 +54,7 @@ def sendNotificationEmail(r: Record) = {
   val mail = use[MailerPlugin].email
 
   mail.setSubject("Nouvelle candidature Startup Contest W2D 2013")
-  mail.addRecipient("f.herveou@tuttivox.com")
-  mail.addRecipient("adrien.crette@clever-cloud.com")
+  mail.addRecipient("f.herveou@tuttivox.com", "adrien.crette@clever-cloud.com")
   mail.addFrom("W2D2013 Startup Contest <noreply@companycamp.us>")
   mail.send("""
     Nouvelle candidature pour le Startup Contest
