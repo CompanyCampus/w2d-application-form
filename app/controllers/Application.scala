@@ -49,6 +49,24 @@ val formInfo = Form(mapping(
   "amount" -> optional(number)
 )(RecordInfo.apply)(RecordInfo.unapply))
 
+def sendNotificationEmail(r: Record) = {
+  import com.typesafe.plugin.{use, MailerPlugin}
+  val mail = use[MailerPlugin].email
+
+  mail.setSubject("Nouvelle candidature Startup Contest W2D 2013")
+  mail.addRecipient("f.herveou@tuttivox.com")
+  mail.addRecipient("adrien.crette@clever-cloud.com")
+  mail.addFrom("W2D2013 Startup Contest <noreply@companycamp.us>")
+  mail.send("""
+    Nouvelle candidature pour le Startup Contest
+    Nom : """ + r.info.name + """
+    Startup : """ + r.info.company + """
+
+    Login administration : https://w2d-form.cleverapps.io/login
+    Candidature : https://w2d-form.cleverapps.io/records/""" + r.id.toString() + """
+  """)
+}
+
   def index = Action { implicit request =>
     Ok(views.html.index(
       formBMC, formInfo
@@ -66,7 +84,7 @@ val formInfo = Form(mapping(
       ))
     } else {
       Record.create(bmc.get, info.get).save match { // Fuck this shit
-        case Success(r) => Ok(
+        case Success(r) => sendNotificationEmail(r); Ok(
           views.html.confirmation()
           (request, request.getQueryString("lang") map { Lang(_) } getOrElse lang)
         )

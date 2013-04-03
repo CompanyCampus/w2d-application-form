@@ -9,6 +9,7 @@ object ApplicationBuild extends Build {
 
     val appDependencies = Seq(
       "play" %% "play-jdbc" % "2.1.0",
+      "com.typesafe" %% "play-plugins-mailer" % "2.1.0",
       "postgresql" % "postgresql" % "9.2-1002.jdbc4",
       "com.typesafe.slick" %% "slick" % "1.0.0",
       "org.slf4j" % "slf4j-nop" % "1.6.4",
