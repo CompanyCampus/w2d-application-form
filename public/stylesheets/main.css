@@ -10,6 +10,10 @@ a:hover {
   text-decoration: none;
 }
 
+.help-inline {
+  color: red;
+}
+
 .introduction {
   margin-top: 40px;
   margin-bottom: 40px;
