@@ -19,6 +19,7 @@ vine=URL de votre vidéo Vine*
 vine.invalid=URL Vine non valide
 twitter=Twitter
 angelco=Page Angel.co
+angelco.invalid=URL Angel.co non valide
 presentationUrl=URL d''une présentation (slideshare, …)
 amount=Montant recherché en € (pour catégoriser les demandes en fourchettes)
 

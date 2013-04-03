@@ -19,6 +19,7 @@ vine=URL of your Vine video
 vine.invalid=Invalid Vine URL
 twitter=Twitter
 angelco=Angel.co page
+angelco.invalid=Invalid Angel.co URL
 presentationUrl=A presentation''s URL (slideshare, …)
 amount=Amount you are looking for in € (for us to categorize applications in ranges)
 
