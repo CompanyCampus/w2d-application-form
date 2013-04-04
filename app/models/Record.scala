@@ -41,7 +41,7 @@ case class RecordInfo(
   companyWebsite: String,
   email: String,
   phone: String,
-  vine: String,
+  vine: Option[String],
   twitter: Option[String],
   angelco: Option[String],
   presentationUrl: Option[String],
@@ -55,7 +55,7 @@ object Record {
     customerRelationships: String, channels: String, customerSegments: String,
     costStructure: String, revenueStreams: String,
     pitch: String, name: String, company: String, email: String, phone: String,
-    vine: String, twitter: Option[String], angelco: Option[String],
+    vine: Option[String], twitter: Option[String], angelco: Option[String],
     presentationUrl: Option[String], amount: Option[Int]
   ): Record = {
     val companyJson = Json.parse(company)
@@ -98,7 +98,7 @@ object Record {
     String, String,
     String, String, 
     String,
-    String, String, String,
+    String, String, Option[String],
     Option[String], Option[String],
     Option[String], Option[Int]
   )] = {
@@ -182,7 +182,7 @@ trait RecordComponent {
     def company = column[String]("record_company")
     def email = column[String]("record_email")
     def phone = column[String]("record_phone")
-    def vine = column[String]("record_vine")
+    def vine = column[Option[String]]("record_vine")
     def twitter = column[Option[String]]("record_twitter")
     def angelco = column[Option[String]]("record_angelco")
     def presentationUrl = column[Option[String]]("record_presentationUrl")
