@@ -87,7 +87,15 @@ def sendNotificationEmail(r: Record) = {
           views.html.confirmation()
           (request, request.getQueryString("lang") map { Lang(_) } getOrElse lang)
         )
-        case Failure(e) => InternalServerError(Messages("record.error"))
+        case Failure(e) => {
+          println("--- Record saving error ---")
+          println("Company: " + info.get.company)
+          println("Name: " + info.get.name)
+          println("E-mail: " + info.get.email)
+          println("Error: " + e.getMessage)
+          println("--------------------")
+          InternalServerError(Messages("record.error"))
+        }
       }
     }
   }
