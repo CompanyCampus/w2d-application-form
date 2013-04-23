@@ -38,6 +38,7 @@ more.info.url=http://www.web2day-nantes.org/en/startup-contest.html
 required={0}: Required
 date.format=yyyy-mm-dd (ex: 2013-03-27)
 what.is.it=What is it?
+need.help=Need help?
 info.publication=These informations will stay confidential
 
 error.title=Error

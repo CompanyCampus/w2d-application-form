@@ -38,6 +38,7 @@ more.info.url=http://www.web2day-nantes.org/startup-contest.html
 required={0} : Requis
 date.format=aaaa-mm-jj (ex : 2013-03-27)
 what.is.it=Qu''est-ce que c''est ?
+need.help=Besoin d''aide ?
 info.publication=Toutes les informations de ce formulaire resteront confidentielles
 
 error.title=Erreur
