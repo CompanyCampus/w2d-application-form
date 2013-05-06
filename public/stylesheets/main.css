@@ -210,3 +210,9 @@ textarea:focus, input[type=text]:focus {
 tbody tr {
   cursor: pointer;
 }
+
+.too-late {
+  margin-top: 100px;
+  text-align: center;
+  font-size: 4em;
+}

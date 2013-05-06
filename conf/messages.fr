@@ -44,3 +44,5 @@ info.publication=Toutes les informations de ce formulaire resteront confidentiel
 error.title=Erreur
 error.content=Il y a des erreurs dans le formulaire. Merci de vérifier ce que vous avez entré, vous trouverez un message d''erreur en-dessous des champs qui posent problème.
 error.close=Fermer
+
+too.late=Trop tard :(

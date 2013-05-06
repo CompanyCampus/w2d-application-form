@@ -143,4 +143,10 @@ def sendNotificationEmail(r: Record) = {
     }
   }
 
+  def closed = Action { implicit request =>
+    Ok(views.html.closed()(
+      request, request.getQueryString("lang") map { Lang(_) } getOrElse lang
+    ))
+  }
+
 }
