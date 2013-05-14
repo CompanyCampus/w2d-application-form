@@ -109,7 +109,10 @@ def sendNotificationEmail(r: Record) = {
         val login = configuration getString "admin.login" getOrElse ""
         val password = configuration getString "admin.password" getOrElse ""
 
-        l == login && p == password
+        val vclogin = configuration getString "vc.login" getOrElse ""
+        val vcpassword = configuration getString "vc.password" getOrElse ""
+
+        (l == login && p == password) || (l == vclogin && p == vcpassword)
       }
       case _ => false
     })
@@ -127,8 +130,15 @@ def sendNotificationEmail(r: Record) = {
   }
 
   def records = Authenticated { username =>
+    val login = configuration getString "admin.login" getOrElse ""
     Action { implicit request =>
-      Ok(views.html.records(Record.getAll))
+      Ok(views.html.records(
+        if(username == login) {
+          Record.getAll
+        } else {
+          Record.getAll filter (_.selected)
+        }
+      ))
     }
   }
 

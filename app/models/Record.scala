@@ -10,7 +10,8 @@ case class Record (
   id: UUID,
   date: DateTime,
   bmc: RecordBMC,
-  info: RecordInfo
+  info: RecordInfo,
+  selected: Boolean
 ) {
   def save() = {
     Try {
@@ -56,7 +57,7 @@ object Record {
     costStructure: String, revenueStreams: String,
     pitch: String, name: String, company: String, email: String, phone: String,
     vine: Option[String], twitter: Option[String], angelco: Option[String],
-    presentationUrl: Option[String], amount: Option[Int]
+    presentationUrl: Option[String], amount: Option[Int], selected: Boolean
   ): Record = {
     val companyJson = Json.parse(company)
     Record(
@@ -88,7 +89,8 @@ object Record {
         angelco = angelco,
         presentationUrl = presentationUrl,
         amount = amount
-      )
+      ),
+      selected = selected
     )
   }
   def unapplyToDAL(record: Record): Option[(
@@ -100,7 +102,8 @@ object Record {
     String,
     String, String, Option[String],
     Option[String], Option[String],
-    Option[String], Option[Int]
+    Option[String], Option[Int],
+    Boolean
   )] = {
     Some(
       record.id, new Timestamp(record.date.getMillis),
@@ -115,7 +118,8 @@ object Record {
       ).toString,
       record.info.email, record.info.phone, record.info.vine,
       record.info.twitter, record.info.angelco,
-      record.info.presentationUrl, record.info.amount
+      record.info.presentationUrl, record.info.amount,
+      record.selected
     )
   }
 
@@ -147,7 +151,8 @@ object Record {
         angelco = info.angelco,
         presentationUrl = info.presentationUrl,
         amount = info.amount
-      )
+      ),
+      selected = false
     )
   }
 
@@ -187,11 +192,13 @@ trait RecordComponent {
     def angelco = column[Option[String]]("record_angelco")
     def presentationUrl = column[Option[String]]("record_presentationUrl")
     def amount = column[Option[Int]]("record_amount")
+    def selected = column[Boolean]("record_selected")
     def * = (
       id ~ date ~ partners ~ activities ~ resources ~ propositions ~
       customerRelationships ~ channels ~ customerSegments ~
       costStructure ~ revenueStreams ~ pitch ~ name ~ company ~
-      email ~ phone ~ vine ~ twitter ~ angelco ~ presentationUrl ~ amount
+      email ~ phone ~ vine ~ twitter ~ angelco ~ presentationUrl ~ amount ~
+      selected
     ) <> (Record.applyFromDAL _, Record.unapplyToDAL _)
 
     def add(record: Record)(implicit session: Session) = {
