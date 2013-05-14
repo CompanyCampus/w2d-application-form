@@ -210,3 +210,7 @@ textarea:focus, input[type=text]:focus {
 tbody tr {
   cursor: pointer;
 }
+
+.horse {
+  margin-top: 15px;
+}

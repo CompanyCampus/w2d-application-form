@@ -4,10 +4,8 @@
 
 @main("Login") {
 <div class="row">
-  <div class="span12">
+  <div class="span6">
     <h1>Administration</h1>
-  </div>
-  <div class="span12">
     <h2>Login</h2>
     @helper.form(action = routes.Application.authenticate, 'class -> "form-horizontal span3") {
 
@@ -23,6 +21,9 @@
       <input type="submit" class="btn btn-primary" value="Connexion" />
 
     }
+  </div>
+  <div class="span6">
+    <img class="horse" src="@routes.Assets.at("images/horse.jpg")" />
   </div>
 </div>
 }
