@@ -6,7 +6,7 @@ import slick.driver.ExtendedProfile
 
 trait DBeable {
   val SLICK_DRIVER = "slick.db.driver"
-  val DEFAULT_SLICK_DRIVER = "scala.slick.driver.H2Driver"
+  val DEFAULT_SLICK_DRIVER = "scala.slick.driver.PostgresDriver"
 
   def getDal(implicit app : Application) : DAL = {
     val driverClass = app.configuration.getString(SLICK_DRIVER).getOrElse(DEFAULT_SLICK_DRIVER)

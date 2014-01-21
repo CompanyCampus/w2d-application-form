@@ -50,28 +50,34 @@ val formInfo = Form(mapping(
 )(RecordInfo.apply)(RecordInfo.unapply))
 
 def sendNotificationEmail(r: Record) = {
-  import com.typesafe.plugin.{use, MailerPlugin}
-  val mail = use[MailerPlugin].email
+  import _root_.util.Mailer
 
-  mail.setSubject("Nouvelle candidature Startup Contest W2D 2013")
-  mail.addRecipient("f.herveou@tuttivox.com", "adrien.crette@clever-cloud.com")
-  mail.addFrom("W2D2013 Startup Contest <noreply@companycamp.us>")
-  mail.send("""
-    Nouvelle candidature pour le Startup Contest
-    Nom : """ + r.info.name + """
-    Startup : """ + r.info.company + """
+  Mailer.send(
+    subject = "Nouvelle candidature Startup Contest W2D 2013",
+    recipients = List("f.herveou@tuttivox.com", "adrien.crette@clever-cloud.com"),
+    from = "W2D2013 Startup Contest <noreply@companycamp.us>",
+    message = """
+Nouvelle candidature pour le Startup Contest
+Nom : """ + r.info.name + """
+Startup : """ + r.info.company + """
 
-    Login administration : https://w2d-form.cleverapps.io/login
-    Candidature : https://w2d-form.cleverapps.io/records/""" + r.id.toString() + """
-  """)
+Login administration : https://w2d-form.cleverapps.io/login
+Candidature : https://w2d-form.cleverapps.io/records/""" + r.id.toString()
+  )
 }
 
   def index = Action { implicit request =>
-    Ok(views.html.index(
-      formBMC, formInfo
-    )(
-      request, request.getQueryString("lang") map { Lang(_) } getOrElse lang
-    ))
+    if(configuration getBoolean "closed" getOrElse false) {
+      Ok(views.html.closed()(
+        request, request.getQueryString("lang") map { Lang(_) } getOrElse lang
+      ))
+    } else {
+      Ok(views.html.index(
+        formBMC, formInfo
+      )(
+        request, request.getQueryString("lang") map { Lang(_) } getOrElse lang
+      ))
+    }
   }
 
   def addRecord = Action { implicit request =>

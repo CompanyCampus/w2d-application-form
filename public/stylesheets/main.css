@@ -214,3 +214,9 @@ tbody tr {
 .horse {
   margin-top: 15px;
 }
+
+.too-late {
+  margin-top: 100px;
+  text-align: center;
+  font-size: 4em;
+}
