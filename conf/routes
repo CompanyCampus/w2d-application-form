@@ -3,9 +3,8 @@
 # ~~~~
 
 # Home page
-#GET     /                           controllers.Application.index
-#POST    /records                    controllers.Application.addRecord
-GET     /                           controllers.Application.closed
+GET     /                           controllers.Application.index
+POST    /records                    controllers.Application.addRecord
 GET     /records                    controllers.Application.records
 GET     /records/:id                controllers.Application.record(id: java.util.UUID)
 GET     /login                      controllers.Application.login

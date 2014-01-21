@@ -67,11 +67,17 @@ Candidature : https://w2d-form.cleverapps.io/records/""" + r.id.toString()
 }
 
   def index = Action { implicit request =>
-    Ok(views.html.index(
-      formBMC, formInfo
-    )(
-      request, request.getQueryString("lang") map { Lang(_) } getOrElse lang
-    ))
+    if(configuration getBoolean "closed" getOrElse false) {
+      Ok(views.html.closed()(
+        request, request.getQueryString("lang") map { Lang(_) } getOrElse lang
+      ))
+    } else {
+      Ok(views.html.index(
+        formBMC, formInfo
+      )(
+        request, request.getQueryString("lang") map { Lang(_) } getOrElse lang
+      ))
+    }
   }
 
   def addRecord = Action { implicit request =>
@@ -141,12 +147,6 @@ Candidature : https://w2d-form.cleverapps.io/records/""" + r.id.toString()
         ))
       } getOrElse BadRequest
     }
-  }
-
-  def closed = Action { implicit request =>
-    Ok(views.html.closed()(
-      request, request.getQueryString("lang") map { Lang(_) } getOrElse lang
-    ))
   }
 
 }
