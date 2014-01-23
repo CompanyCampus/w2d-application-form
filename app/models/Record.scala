@@ -69,31 +69,8 @@ object Record {
     Record(
       id = UUID.randomUUID(),
       date = new DateTime,
-      bmc = RecordBMC(
-        partners = bmc.partners,
-        activities = bmc.activities,
-        resources = bmc.resources,
-        propositions = bmc.propositions,
-        customerRelationships = bmc.customerRelationships,
-        channels = bmc.channels,
-        customerSegments = bmc.customerSegments,
-        costStructure = bmc.costStructure,
-        revenueStreams = bmc.revenueStreams
-      ),
-      info = RecordInfo(
-        pitch = info.pitch,
-        name = info.name,
-        company = info.company,
-        companyCreation = new DateTime(info.companyCreation),
-        companyWebsite = info.companyWebsite,
-        email = info.email,
-        phone = info.phone,
-        vine = info.vine,
-        twitter = info.twitter,
-        angelco = info.angelco,
-        presentationUrl = info.presentationUrl,
-        amount = info.amount
-      ),
+      bmc = bmc,
+      info = info,
       selected = false
     )
   }
