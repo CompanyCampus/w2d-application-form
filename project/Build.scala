@@ -10,7 +10,7 @@ object ApplicationBuild extends Build {
     val appDependencies = Seq(
       jdbc, filters,
       "com.typesafe" %% "play-plugins-mailer" % "2.2.0",
-      "com.typesafe.slick" %% "slick" % "1.0.1",
+      "com.typesafe.slick" %% "slick" % "2.0.0",
       "com.typesafe.play" %% "play-slick" % "0.5.0.8",
       "org.slf4j" % "slf4j-nop" % "1.6.4",
       "joda-time" % "joda-time" % "2.1",

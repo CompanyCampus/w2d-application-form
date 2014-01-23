@@ -1,5 +1,5 @@
 package models
-import slick.session.Database
+import slick.jdbc.JdbcBackend.Database
 import play.api.db.DB
 import play.api.Application
 import slick.driver.ExtendedProfile
