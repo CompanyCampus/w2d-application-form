@@ -17,6 +17,9 @@ import models._
 
 object Application extends Controller {
 
+def getLang()(implicit request: Request[AnyContent], lang: Lang) =
+  request.getQueryString("lang") map(Lang(_)) getOrElse lang
+
 val formBMC = Form(mapping(
   "partners" -> text.verifying(nonEmpty),
   "activities" -> text.verifying(nonEmpty),
@@ -52,13 +55,13 @@ val formInfo = Form(mapping(
   def index = Action { implicit request =>
     if(configuration getBoolean "closed" getOrElse false) {
       Ok(views.html.closed()(
-        request, request.getQueryString("lang") map { Lang(_) } getOrElse lang
+        request, getLang
       ))
     } else {
       Ok(views.html.index(
         formBMC, formInfo
       )(
-        request, request.getQueryString("lang") map { Lang(_) } getOrElse lang
+        request, getLang
       ))
     }
   }
@@ -68,13 +71,13 @@ val formInfo = Form(mapping(
     val info =  formInfo.bindFromRequest
     if(bmc.hasErrors || info.hasErrors) {
       BadRequest(views.html.index(bmc, info)(
-        request, request.getQueryString("lang") map { Lang(_) } getOrElse lang
+        request, getLang
       ))
     } else {
       Record.create(bmc.get, info.get).save match { // Fuck this shit
         case Success(r) => r.sendNotificationEmail; Ok(
           views.html.confirmation()
-          (request, request.getQueryString("lang") map { Lang(_) } getOrElse lang)
+          (request, getLang)
         )
         case Failure(e) => {
           println("--- Record saving error ---")
