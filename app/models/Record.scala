@@ -3,7 +3,6 @@ import java.util.UUID
 import scala.util.Try
 import org.joda.time.DateTime
 import java.sql.Timestamp
-import play.api.libs.json._
 
 case class Record (
   id: UUID,
