@@ -1,8 +1,13 @@
-@(records: List[models.Record])
+@(records: List[models.Record], user: models.User)(implicit request: Request[AnyContent], lang: Lang)
 
-@main("web2day Applications") {
+@adminpage(Messages("applications")) {
 
-<h1>web2day Applications</h1>
+<h1>@Messages("records.title")</h1>
+@if(user.kind == models.UserKind.Admin) {
+  <a class="btn btn-primary" href="/users" style="float: right; position: relative; top: -45px;">
+    @Messages("users")
+  </a>
+}
 
 <table class="table table-hover">
   <thead><tr>

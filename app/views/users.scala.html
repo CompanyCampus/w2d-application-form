@@ -1,0 +1,53 @@
+@(users: List[models.User], currentUser: models.User, addUserForm: Form[(String, String)])(implicit request: Request[AnyContent], lang: Lang)
+
+@import helper.twitterBootstrap._
+
+@adminpage(Messages("users")) {
+
+<h2>@Messages("adduser")</h2>
+<div class="row"><div class="span4">
+  @helper.form(action = routes.Application.addUser) {
+    @for(error <- addUserForm.globalErrors) {
+      <p>@error.message</p>
+    }
+
+    <p>
+      @helper.inputText(addUserForm("email"), 'type -> "email")
+      @helper.select(field = addUserForm("kind"), options = Seq(("VC", "VC"), ("Admin", "Admin")))
+    </p>
+
+    <input type="submit" class="btn btn-primary" value="@Messages("adduser.button")" />
+  }
+</div></div>
+
+<h2>@Messages("users")</h2>
+<div class="row">
+  <table class="span12 table table-hover">
+    <thead>
+      <tr>
+        <th>@Messages("email")</th>
+        <th>@Messages("kind")</th>
+        <th style="width: 150px;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(u <- users) {
+        <tr>
+          <td>@u.email</td>
+          <td>@u.kind.toString</td>
+          <td>
+            <button class="delete btn btn-small"
+                    data-target="@u.id.toString"
+                    data-text-normal="@Messages("user.delete")"
+                    data-text-confirm="@Messages("user.delete.confirm")"
+                    @if(currentUser == u) { disabled="disabled" }>
+              @Messages("user.delete")
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+}

@@ -46,3 +46,22 @@ error.content=Il y a des erreurs dans le formulaire. Merci de vérifier ce que v
 error.close=Fermer
 
 too.late=Trop tard :(
+
+password=Mot de passe
+kind=Type de compte
+user.delete=Supprimer
+user.delete.confirm=Êtes-vous sûr ?
+user.delete.fail=Erreur lors de la suppression
+
+backtorecords=Retourner à la liste des candidatures
+
+applications=Candidatures
+
+records.title=Candidatures du Startup Contest Web2day
+
+users=Utilisateurs
+adduser=Ajouter un utilisateur
+adduser.button=Créer & envoyer un e-mail
+
+choosepassword.title=Choisissez votre mot de passe
+choosepassword.button=Sauvegarder

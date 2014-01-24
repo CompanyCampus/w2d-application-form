@@ -46,3 +46,14 @@ error.content=We found some errors in your application. Please check what you ty
 error.close=Got it!
 
 too.late=Too late :(
+
+password=Password
+kind=Account type
+user.delete=Delete
+user.delete.confirm=Are you sure?
+user.delete.fail=An error occured while deleting the user
+
+backtorecords=Go back to the applications list
+
+choosepassword.title=Choose your password
+choosepassword.button=Save

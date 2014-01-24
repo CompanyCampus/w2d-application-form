@@ -14,7 +14,8 @@ object ApplicationBuild extends Build {
       "com.typesafe.play" %% "play-slick" % "0.5.0.8",
       "org.slf4j" % "slf4j-nop" % "1.6.4",
       "joda-time" % "joda-time" % "2.1",
-      "org.joda" % "joda-convert" % "1.2"
+      "org.joda" % "joda-convert" % "1.2",
+      "org.mindrot" % "jbcrypt" % "0.3m"
     )
 
     val main = play.Project(appName, appVersion, appDependencies).settings(

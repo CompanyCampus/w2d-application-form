@@ -9,6 +9,11 @@ GET     /records                    controllers.Application.records
 GET     /records/:id                controllers.Application.record(id: java.util.UUID)
 GET     /login                      controllers.Application.login
 POST    /authenticate               controllers.Application.authenticate
+GET     /users                      controllers.Application.users
+POST    /users                      controllers.Application.addUser
+DELETE  /users/:id                  controllers.Application.deleteUser(id: java.util.UUID)
+GET     /users/:id/choosepassword   controllers.Application.choosePasswordPage(id: java.util.UUID, token: String)
+POST    /users/:id/choosepassword   controllers.Application.choosePassword(id: java.util.UUID)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
