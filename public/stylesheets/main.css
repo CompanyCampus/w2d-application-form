@@ -1,3 +1,9 @@
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 body {
   background: #FDFDFD;
 }
@@ -10,6 +16,138 @@ a:hover {
   text-decoration: none;
 }
 
+.clear {
+  clear: both;
+}
+
+body.home {
+  background: url(../images/header-background.jpg) no-repeat;
+  background-size: 100% auto;
+}
+
+header .logo {
+  display: inline-block;
+  width: 410px;
+}
+header .logo-web2day {
+  height: 200px;
+  background: url(../images/web2day.png) no-repeat;
+  background-size: contain;
+  float: left;
+}
+header .logo-companycampus {
+  height: 50px;
+  margin-top: 87px;
+  background: url(../images/companycampus.png) no-repeat;
+  background-size: contain;
+  float: right;
+}
+@media screen and (max-width: 985px) {
+  header .logo {
+    width: 300px;
+  }
+  header .logo-web2day {
+    height: 150px;
+  }
+  header .logo-companycampus {
+    margin-top: 65px;
+  }
+  .presentation {
+    margin-top: 80px;
+  }
+}
+@media screen and (max-width: 750px) {
+  header .logo {
+    width: 200px;
+  }
+  header .logo-web2day {
+    height: 100px;
+  }
+  header .logo-companycampus {
+    margin-top: 42px;
+  }
+  .presentation {
+    margin-top: 50px;
+  }
+}
+@media screen and (max-width: 460px) {
+  header .logo {
+    display: block;
+    width: 100%;
+    background-position: center;
+  }
+  header .logo-web2day {
+    height: 100px;
+    float: none;
+  }
+  header .logo-companycampus {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    float: none;
+  }
+  .presentation {
+    margin-top: 30px;
+  }
+}
+
+header.home h1 {
+  font-size: 4em;
+  margin-top: 60px;
+  text-align: center;
+  line-height: 1em;
+}
+
+.presentation {
+  max-width: 500px;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 1.5em;
+  text-align: justify;
+  margin-top: 100px;
+}
+.presentation p {
+  margin-bottom: 30px;
+}
+@media screen and (max-width: 985px) {
+  .presentation {
+    margin-top: 80px;
+  }
+}
+@media screen and (max-width: 750px) {
+  .presentation {
+    margin-top: 50px;
+  }
+}
+@media screen and (max-width: 460px) {
+  .presentation {
+    margin-top: 30px;
+  }
+}
+
+.login {
+  margin: 0 auto;
+  margin-bottom: 30px;
+  max-width: 500px;
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.75);
+  box-shadow: inset 0 0 18px 2px rgba(0, 0, 0, 0.1);
+  color: white;
+  border-radius: 5px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.34);
+}
+.login input {
+  width: 100%;
+  padding: 18px 10px;
+  border-radius: 2px;
+}
+.login input[type=submit] {
+  padding: 8px 0;
+  margin-top: 20px;
+}
+.login form {
+  margin-bottom: 5px;
+}
+
 .help-inline {
   color: red;
 }
@@ -17,14 +155,6 @@ a:hover {
 .introduction {
   margin-top: 40px;
   margin-bottom: 40px;
-}
-
-.presentation {
-  max-width: 600px;
-}
-
-.presentation .more .content {
-  display: none;
 }
 
 .web2day-logo {

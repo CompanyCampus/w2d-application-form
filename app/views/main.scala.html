@@ -1,4 +1,4 @@
-@(title: String)(content: Html)(implicit request: Request[AnyContent], lang: Lang)
+@(title: String, bodyclass: Option[String] = None)(content: Html)(implicit request: Request[AnyContent], lang: Lang)
 
 <!DOCTYPE html>
 
@@ -13,7 +13,7 @@
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     </head>
-    <body>
+    <body class=@bodyclass>
       <div class="container">
         @content
       </div>

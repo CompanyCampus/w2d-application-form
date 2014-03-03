@@ -1,0 +1,40 @@
+@(formBMC: Form[RecordBMC], formInfo: Form[RecordInfo])(implicit request: Request[AnyContent], lang: Lang)
+@import helper.twitterBootstrap._
+
+@main(Messages("title")) {
+
+<h1>@Messages("title")</h1>
+<form action="/records?lang=@lang.code" method="POST">
+  <div class="row introduction">
+    <div class="presentation span6">
+      <div class="main">@Html(Messages("presentation"))</div>
+      <a href="@Messages("more.info.url")">@Messages("more.info")</a>
+    </div>
+    <div class="span6">
+      <div class="web2day-logo"></div>
+    </div>
+  </div>
+  <p><small>@Messages("required", "*")</small></p>
+  @form(formBMC, formInfo)
+  <div class="row">
+    <div class="span12">
+      <p><small>@Messages("required", "*")</small></p>
+      <p><small>@Messages("info.publication")</small><br /><br /></p>
+      <input class="btn btn-primary btn-large" type="submit" value="@Messages("apply")" />
+    <div>
+  </div>
+</form>
+
+<div id="error-modal" class="modal hide fade" tabindex="-1" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>@Messages("error.title")</h3>
+  </div>
+  <div class="modal-body">
+    @Messages("error.content")
+  </div>
+  <div class="modal-footer">
+    <button href="#" class="btn btn-primary" data-dismiss="modal">@Messages("error.close")</button>
+  </div>
+</div>
+}
