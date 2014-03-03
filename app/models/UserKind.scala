@@ -1,12 +1,19 @@
 package models
-import scala.language.implicitConversions
 
-object UserKind extends Enumeration {
-  type UserKind = Value
-  val Admin = Value("Admin")
-  val VC = Value("VC")
+sealed trait UserKind { def hasVcRights = false }
+object UserKind {
+  case object Admin extends UserKind { override def hasVcRights = true }
+  case object VC extends UserKind { override def hasVcRights = true }
+  case object Startup extends UserKind
+  case object Unverified extends UserKind
 
-  class UserKindValue(userKind: Value)
-
-  implicit def valueToUserKindValue(userKind: Value) = new UserKindValue(userKind)
+  def fromString(x: String): Option[UserKind] = {
+    x match {
+      case "Admin" => Some(Admin)
+      case "VC" => Some(VC)
+      case "Startup" => Some(Startup)
+      case "Unverified" => Some(Unverified)
+      case _ => None
+    }
+  }
 }

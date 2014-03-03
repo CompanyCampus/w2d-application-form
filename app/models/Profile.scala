@@ -1,6 +1,6 @@
 package models
-import slick.driver.ExtendedProfile
+import slick.driver.JdbcProfile
 
 trait Profile {
-  val profile: ExtendedProfile
+  val profile: JdbcProfile
 }

@@ -4,11 +4,11 @@
 
 # Home page
 GET     /                           controllers.Application.index
+GET     /submission                 controllers.Application.submission
 POST    /records                    controllers.Application.addRecord
 GET     /records                    controllers.Application.records
 GET     /records/:id                controllers.Application.record(id: java.util.UUID)
-GET     /login                      controllers.Application.login
-POST    /authenticate               controllers.Application.authenticate
+POST    /sessions                   controllers.Application.authenticate
 GET     /users                      controllers.Application.users
 POST    /users                      controllers.Application.addUser
 DELETE  /users/:id                  controllers.Application.deleteUser(id: java.util.UUID)

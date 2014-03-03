@@ -10,7 +10,7 @@ case class User (
   email: String,
   password: Option[String] = None,
   token: String,
-  kind: UserKind.Value
+  kind: UserKind
 ) {
 
   def save = {
@@ -27,6 +27,14 @@ case class User (
       updated
     }
   }
+
+  def hasPassword(password: String) = {
+    this.password map { pw =>
+      BCrypt.checkpw(password, pw)
+    } getOrElse false
+  }
+
+  def hasVcRights = this.kind.hasVcRights
 
   def sendCreatedEmail() {
     import _root_.util.Mailer
@@ -49,12 +57,22 @@ You need to choose a password here: """ + url
 }
 
 object User {
-  def create(email: String, kind: UserKind.Value): User = {
+  def create(email: String, kind: UserKind): User = {
     User(
       id = UUID.randomUUID(),
       email = email,
       token = scala.util.Random.alphanumeric.take(40).mkString,
       kind = kind
+    )
+  }
+
+  def create(email: String, password: String): User = {
+    User(
+      id = UUID.randomUUID(),
+      email = email,
+      password = Some(BCrypt.hashpw(password, BCrypt.gensalt)),
+      token = scala.util.Random.alphanumeric.take(40).mkString,
+      kind = UserKind.Unverified
     )
   }
 
@@ -80,16 +98,16 @@ trait UserComponent {
   import profile.simple._
 
   class Users(tag: Tag) extends Table[User](tag, "users") {
-    implicit val userKindTM = MappedColumnType.base[UserKind.Value, String](
+    implicit val userKindTM = MappedColumnType.base[UserKind, String](
       uk => uk.toString,
-      str => UserKind.withName(str)
+      str => UserKind.fromString(str).getOrElse(UserKind.Unverified)
     )
 
     def id = column[UUID]("user_id", O.PrimaryKey)
     def email = column[String]("user_email")
     def password = column[Option[String]]("user_password")
     def token = column[String]("user_token")
-    def kind = column[UserKind.Value]("user_kind")
+    def kind = column[UserKind]("user_kind")
     def * = (
       id, email, password, token, kind
     ) <> ((User.apply _).tupled, User.unapply)

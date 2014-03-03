@@ -2,7 +2,7 @@ package models
 import slick.jdbc.JdbcBackend.Database
 import play.api.db.DB
 import play.api.Application
-import slick.driver.ExtendedProfile
+import slick.driver.JdbcProfile
 
 trait DBeable {
   val SLICK_DRIVER = "slick.db.driver"
@@ -10,7 +10,7 @@ trait DBeable {
 
   def getDal(implicit app : Application) : DAL = {
     val driverClass = app.configuration.getString(SLICK_DRIVER).getOrElse(DEFAULT_SLICK_DRIVER)
-    val driver = singleton[ExtendedProfile](driverClass)
+    val driver = singleton[JdbcProfile](driverClass)
     new DAL(driver)
   }
 

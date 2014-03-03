@@ -54,12 +54,53 @@ val formInfo = Form(mapping(
 )(RecordInfo.apply)(RecordInfo.unapply))
 
   def index = Action { implicit request =>
+    Ok(views.html.index())
+  }
+
+  def authenticate = Action { implicit request =>
+    request.body.asFormUrlEncoded flatMap { rawdata =>
+      val data = rawdata map { x => (x._1, x._2.headOption) } collect {
+        case (k: String, v: Some[String]) => (k, v.get)
+      }
+      for {
+        email <- data.get("email")
+        password <- data.get("password")
+      } yield {
+        User.get(email) map { u =>
+          if(u.hasPassword(password)) {
+            Redirect("/submission").withSession("username" -> u.email)
+          } else {
+            Redirect("/").flashing("error" -> "incorrectpassword")
+          }
+        } getOrElse {
+          User.create(email, password).save match {
+            case Success(u) => {
+              Redirect("/submission").withSession(
+                "username" -> u.email
+              ).flashing(
+                "message" -> "accountcreated"
+              )
+            }
+            case Failure(e) => {
+              println("--- Account creation error ---")
+              println(email)
+              println(e.getMessage)
+              println("------------------------------")
+              InternalServerError("Something wrong happened while trying to create your account. Try again?")
+            }
+          }
+        }
+      }
+    } getOrElse BadRequest("Incomplete form")
+  }
+
+  def submission = Action { implicit request =>
     if(configuration getBoolean "closed" getOrElse false) {
       Ok(views.html.closed()(
         request, getLang
       ))
     } else {
-      Ok(views.html.index(
+      Ok(views.html.submission(
         formBMC, formInfo
       )(
         request, getLang
@@ -71,7 +112,7 @@ val formInfo = Form(mapping(
     val bmc = formBMC.bindFromRequest
     val info =  formInfo.bindFromRequest
     if(bmc.hasErrors || info.hasErrors) {
-      BadRequest(views.html.index(bmc, info)(
+      BadRequest(views.html.submission(bmc, info)(
         request, getLang
       ))
     } else {
@@ -93,38 +134,17 @@ val formInfo = Form(mapping(
     }
   }
 
-  def loginForm = Form(
-    tuple(
-      "email" -> text,
-      "password" -> text
-    ) verifying("Wrong credentials", result => result match {
-      case (email, pw) => {
-        User.authenticate(email, pw)
-      }
-      case _ => false
-    })
-  )
-
-  def login = Action { implicit request =>
-    Ok(views.html.login(loginForm))
-  }
-
-  def authenticate = Action { implicit request =>
-    loginForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(views.html.login(formWithErrors)),
-      user => Redirect(routes.Application.records).withSession("username" -> user._1)
-    )
-  }
-
   def records = Authenticated { email =>
     Action { implicit request =>
       User.get(email) map { u =>
-        Ok(views.html.records(
-          u.kind match {
-            case UserKind.Admin => Record.getAll
-            case UserKind.VC => Record.getAll filter (_.selected)
-          }, u
-        ))
+        if(u.hasVcRights) {
+          Ok(views.html.records(
+            u.kind match {
+              case UserKind.Admin => Record.getAll
+              case UserKind.VC => Record.getAll filter (_.selected)
+            }, u
+          ))
+        } else Forbidden
       } getOrElse Unauthorized
     }
   }
@@ -132,12 +152,14 @@ val formInfo = Form(mapping(
   def record(id: UUID) = Authenticated { email =>
     Action { implicit request =>
       User.get(email) map { u =>
-        Record.get(id) map { r =>
-          Ok(views.html.record(
-            formBMC.fill(r.bmc),
-            formInfo.fill(r.info)
-          ))
-        } getOrElse BadRequest
+        if(u.hasVcRights) {
+          Record.get(id) map { r =>
+            Ok(views.html.record(
+              formBMC.fill(r.bmc),
+              formInfo.fill(r.info)
+            ))
+          } getOrElse BadRequest
+        } else Forbidden
       } getOrElse Unauthorized
     }
   }
@@ -157,7 +179,7 @@ val formInfo = Form(mapping(
   def addUserForm = Form(
     tuple(
       "email" -> text.verifying("E-mail already used", email => User.get(email).isEmpty),
-      "kind" -> text.verifying("Incorrect kind", kind => allCatch.opt(UserKind.withName(kind)).isDefined)
+      "kind" -> text.verifying("Incorrect kind", kind => UserKind.fromString(kind).isDefined)
     )
   )
 
@@ -168,7 +190,7 @@ val formInfo = Form(mapping(
           addUserForm.bindFromRequest.fold(
             formWithErrors => BadRequest(views.html.users(User.getAll, u, formWithErrors)),
             user => {
-              User.create(user._1, UserKind.withName(user._2)).save match {
+              User.create(user._1, UserKind.fromString(user._2).getOrElse(UserKind.Unverified)).save match {
                 case Success(u) => u.sendCreatedEmail; Redirect(routes.Application.users)
                 case Failure(e) => InternalServerError(e.getMessage)
               }
