@@ -51,7 +51,7 @@ val formInfo = Form(mapping(
 )(RecordInfo.apply)(RecordInfo.unapply))
 
   def index = Action { implicit request =>
-    Ok(views.html.index())
+    Ok(views.html.index()(request, getLang))
   }
 
   def authenticate = Action { implicit request =>
