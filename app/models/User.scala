@@ -36,6 +36,43 @@ case class User (
 
   def hasVcRights = this.kind.hasVcRights
 
+  def validate() = {
+    val updated = this.copy(kind = UserKind.Startup)
+    Try {
+      AppDB.dal.Users.updateKind(updated)
+      updated
+    }
+  }
+
+  def resetToken() = {
+    val updated = this.copy(token = scala.util.Random.alphanumeric.take(40).mkString)
+    Try {
+      AppDB.dal.Users.updateToken(updated)
+      updated
+    }
+  }
+
+  def sendValidationEmail() {
+    import _root_.util.Mailer
+
+    val link =
+      (configuration getString "baseurl" getOrElse "https://w2d-startupcontest.cleverapps.io/") +
+      "users/" + this.id.toString + "/validate?token=" + this.token
+
+    Mailer.send(
+      subject = "Validate your Startup Contest account",
+      recipient = this.email,
+      from = "W2D2014 Startup Contest <noreply@companycamp.us>",
+      message = s"""
+Hello,
+
+You need to validate your account to be able to submit your application.
+
+Click here: $link
+"""
+    )
+  }
+
   def sendCreatedEmail() {
     import _root_.util.Mailer
     
@@ -141,6 +178,18 @@ trait UserComponent {
     def updatePassword(user: User) = {
       AppDB.database.withSession { implicit session: Session =>
         this.filter(_.id === user.id) map(_.password) update(user.password)
+      }
+    }
+
+    def updateKind(user: User) = {
+      AppDB.database.withSession { implicit session: Session =>
+        this.filter(_.id === user.id) map (_.kind) update(user.kind)
+      }
+    }
+
+    def updateToken(user: User) = {
+      AppDB.database.withSession { implicit session: Session =>
+        this.filter(_.id === user.id) map (_.token) update(user.token)
       }
     }
 

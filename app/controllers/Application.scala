@@ -72,6 +72,7 @@ val formInfo = Form(mapping(
         } getOrElse {
           User.create(email, password).save match {
             case Success(u) => {
+              u.sendValidationEmail
               Redirect("/submission").withSession(
                 "username" -> u.email
               ).flashing(
@@ -89,6 +90,30 @@ val formInfo = Form(mapping(
         }
       }
     } getOrElse BadRequest("Incomplete form")
+  }
+
+  def validateUser(id: UUID, token: String) = Action { implicit request =>
+    User.get(id) map { u =>
+      if(token == u.token) {
+        u.validate match {
+          case Success(u) => {
+            u.resetToken
+            Redirect("/submission").withSession(
+              "username" -> u.email
+            ).flashing(
+              "message" -> "accountvalidated"
+            )
+          }
+          case Failure(e) => {
+            println("--- Account validation error ---")
+            println(email)
+            println(e.getMessage)
+            println("------------------------------")
+            InternalServerError("Something wrong happened while trying to validate your account. Try again?")
+          }
+        }
+      } else BadRequest("Wrong token")
+    } getOrElse NotFound
   }
 
   def submission = Action { implicit request =>
@@ -139,6 +164,7 @@ val formInfo = Form(mapping(
             u.kind match {
               case UserKind.Admin => Record.getAll
               case UserKind.VC => Record.getAll filter (_.selected)
+              case _ => List()
             }, u
           ))
         } else Forbidden
