@@ -126,7 +126,7 @@ val formInfo = Form(mapping(
             formBMC, formInfo, (configuration getBoolean "closed" getOrElse false)
           ))
         } else {
-          Redirect("/")
+          Redirect("/records")
         }
       } getOrElse Unauthorized
     }
