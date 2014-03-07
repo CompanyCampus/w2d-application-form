@@ -142,10 +142,15 @@ header.home h1 {
 }
 .login input[type=submit] {
   padding: 8px 0;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 .login form {
   margin-bottom: 5px;
+}
+.login a {
+  color: white;
+  text-decoration: underline;
+  font-size: 0.7rem;
 }
 
 .help-inline {

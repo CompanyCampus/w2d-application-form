@@ -241,6 +241,10 @@ val formInfo = Form(mapping(
     }
   }
 
+  def forgottenpasswordPage() = Action { implicit request =>
+    
+  }
+
   def choosePasswordForm = Form(
     tuple(
       "token" -> text,

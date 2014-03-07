@@ -9,6 +9,8 @@ POST    /records                    controllers.Application.addRecord
 GET     /records                    controllers.Application.records
 GET     /records/:id                controllers.Application.record(id: java.util.UUID)
 POST    /sessions                   controllers.Application.authenticate
+GET     /forgottenpassword          controllers.Application.forgottenpasswordPage
+POST    /forgottenpassword          controllers.Application.forgottenpassword
 GET     /users                      controllers.Application.users
 POST    /users                      controllers.Application.addUser
 DELETE  /users/:id                  controllers.Application.deleteUser(id: java.util.UUID)
