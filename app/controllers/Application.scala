@@ -51,7 +51,8 @@ val formInfo = Form(mapping(
 )(RecordInfo.apply)(RecordInfo.unapply))
 
   def index = Action { implicit request =>
-    Ok(views.html.index()(request, getLang))
+    implicit val lang = getLang
+    Ok(views.html.index())
   }
 
   def authenticate = Action { implicit request =>
@@ -67,7 +68,7 @@ val formInfo = Form(mapping(
           if(u.hasPassword(password)) {
             Redirect("/submission").withSession("username" -> u.email)
           } else {
-            Redirect("/").flashing("error" -> "incorrectpassword")
+            Redirect("/").flashing("error" -> Messages("incorrectpassword"))
           }
         } getOrElse {
           User.create(email, password).save match {
@@ -76,7 +77,7 @@ val formInfo = Form(mapping(
               Redirect("/submission").withSession(
                 "username" -> u.email
               ).flashing(
-                "message" -> "accountcreated"
+                "message" -> Messages("accountcreated")
               )
             }
             case Failure(e) => {
@@ -101,7 +102,7 @@ val formInfo = Form(mapping(
             Redirect("/submission").withSession(
               "username" -> u.email
             ).flashing(
-              "message" -> "accountvalidated"
+              "message" -> Messages("accountvalidated")
             )
           }
           case Failure(e) => {
@@ -116,32 +117,33 @@ val formInfo = Form(mapping(
     } getOrElse NotFound
   }
 
-  def submission = Action { implicit request =>
-    if(configuration getBoolean "closed" getOrElse false) {
-      Ok(views.html.closed()(
-        request, getLang
-      ))
-    } else {
-      Ok(views.html.submission(
-        formBMC, formInfo
-      )(
-        request, getLang
-      ))
+  def submission = Authenticated { email =>
+    Action { implicit request =>
+      implicit val lang = getLang
+      User.get(email) map { u =>
+        if(!u.hasVcRights) {
+          Ok(views.html.submission(
+            formBMC, formInfo, (configuration getBoolean "closed" getOrElse false)
+          ))
+        } else {
+          Redirect("/")
+        }
+      } getOrElse Unauthorized
     }
   }
 
   def addRecord = Action { implicit request =>
+    implicit val lang = getLang
     val bmc = formBMC.bindFromRequest
     val info =  formInfo.bindFromRequest
     if(bmc.hasErrors || info.hasErrors) {
-      BadRequest(views.html.submission(bmc, info)(
-        request, getLang
+      BadRequest(views.html.submission(
+        bmc, info, (configuration getBoolean "closed" getOrElse false)
       ))
     } else {
       Record.create(bmc.get, info.get).save match { // Fuck this shit
         case Success(r) => r.sendNotificationEmail; Ok(
           views.html.confirmation()
-          (request, getLang)
         )
         case Failure(e) => {
           println("--- Record saving error ---")

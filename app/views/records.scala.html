@@ -1,4 +1,4 @@
-@(records: List[models.Record], user: models.User)(implicit request: Request[AnyContent], lang: Lang)
+@(records: List[models.Record], user: models.User)(implicit request: Request[AnyContent], lang: Lang, flash: Flash)
 
 @adminpage(Messages("applications")) {
 

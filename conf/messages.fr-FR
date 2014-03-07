@@ -68,3 +68,7 @@ login.email.placeholder=jean+startupcontest@martin.name
 login.password.label=Mot de passe
 login.password.placeholder=Mon mot de passe sécurisé
 login.submit=Inscription / Connexion
+
+incorrectpassword=Mot de passe incorrect
+accountcreated=Compte créé !
+accountvalidated=E-mail validé !

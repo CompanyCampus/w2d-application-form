@@ -60,3 +60,7 @@ login.email.placeholder=john+startupcontest@doe.name
 login.password.label=Password
 login.password.placeholder=My secure password
 login.submit=Register / Login
+
+incorrectpassword=Incorrect password
+accountcreated=Account created!
+accountvalidated=E-mail validated!

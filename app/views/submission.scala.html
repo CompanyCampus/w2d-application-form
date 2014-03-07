@@ -1,4 +1,4 @@
-@(formBMC: Form[RecordBMC], formInfo: Form[RecordInfo])(implicit request: Request[AnyContent], lang: Lang)
+@(formBMC: Form[RecordBMC], formInfo: Form[RecordInfo], isClosed: Boolean)(implicit request: Request[AnyContent], lang: Lang, flash: Flash)
 @import helper.twitterBootstrap._
 
 @main(Messages("title")) {
