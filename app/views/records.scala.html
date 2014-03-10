@@ -28,7 +28,7 @@
       <tr data-uuid="@r.id">
         <td>@{r.info.name}</td>
         <td>@{r.info.company}</td>
-        <td>@{r.info.companyCreation.toString("yyyy-MM-dd")}</td>
+        <td>@{r.info.companyCreation.map(_.toString("yyyy-MM-dd")).getOrElse("")}</td>
         <td>@{r.info.companyWebsite}</td>
         <td>@{r.info.email}</td>
         <td>@{r.info.phone}</td>

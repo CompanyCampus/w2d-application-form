@@ -10,7 +10,7 @@ import play.api.i18n._
 import play.api.Play.configuration
 import play.api.Play.current
 import org.joda.time.DateTime
-import scala.util.{Success, Failure}
+import scala.util.{Try, Success, Failure}
 import scala.util.control.Exception.allCatch
 import java.util.UUID
 
@@ -36,7 +36,7 @@ val formInfo = Form(mapping(
   "pitch" -> text.verifying(minLength(1), maxLength(400)),
   "name" -> text.verifying(nonEmpty),
   "company" -> text.verifying(nonEmpty),
-  "companyCreation" -> jodaDate("yyyy-MM-dd"),
+  "companyCreation" -> optional(jodaDate("yyyy-MM-dd")),
   "companyWebsite" -> text.verifying(nonEmpty),
   "email" -> email.verifying(nonEmpty),
   "phone" -> text.verifying(nonEmpty),
@@ -123,38 +123,73 @@ val formInfo = Form(mapping(
       User.get(email) map { u =>
         if(!u.hasVcRights) {
           Ok(views.html.submission(
-            formBMC, formInfo, (configuration getBoolean "closed" getOrElse false)
+            formBMC.fill(u.record.bmc),
+            formInfo.fill(u.record.info),
+            u,
+            u.record.submitted,
+            (configuration getBoolean "closed" getOrElse false)
           ))
         } else {
-          Redirect("/")
+          Redirect("/records")
         }
       } getOrElse Unauthorized
     }
   }
-
-  def addRecord = Action { implicit request =>
-    implicit val lang = getLang
-    val bmc = formBMC.bindFromRequest
-    val info =  formInfo.bindFromRequest
-    if(bmc.hasErrors || info.hasErrors) {
-      BadRequest(views.html.submission(
-        bmc, info, (configuration getBoolean "closed" getOrElse false)
-      ))
-    } else {
-      Record.create(bmc.get, info.get).save match { // Fuck this shit
-        case Success(r) => r.sendNotificationEmail; Ok(
-          views.html.confirmation()
-        )
-        case Failure(e) => {
-          println("--- Record saving error ---")
-          println("Company: " + info.get.company)
-          println("Name: " + info.get.name)
-          println("E-mail: " + info.get.email)
-          println("Error: " + e.getMessage)
-          println("--------------------")
-          InternalServerError(Messages("record.error"))
+  
+  def updateRecord() = this._saveRecord(true)
+  def saveRecord() = this._saveRecord(false)
+  def _saveRecord(saveonly: Boolean) = Authenticated { email =>
+    Action { implicit request =>
+      implicit val lang = getLang
+      User.get(email) map { u =>
+        val bmc = formBMC.bindFromRequest
+        val info =  formInfo.bindFromRequest
+        if(!saveonly && (bmc.hasErrors || info.hasErrors)) {
+          BadRequest(views.html.submission(
+            bmc, info, u, false, (configuration getBoolean "closed" getOrElse false)
+          ))
+        } else {
+          if(u.record.submitted) {
+            if(saveonly) {
+              Forbidden
+            } else {
+              Redirect("/submission").flashing("error" -> Messages("alreadysubmitted"))
+            }
+          } else {
+            val bmcValue = bmc.value getOrElse RecordBMC(
+              partners = bmc.data.get("partners").getOrElse(""),
+              activities = bmc.data.get("activities").getOrElse(""),
+              resources = bmc.data.get("resources").getOrElse(""),
+              propositions = bmc.data.get("propositions").getOrElse(""),
+              customerRelationships = bmc.data.get("customerRelationships").getOrElse(""),
+              channels = bmc.data.get("channels").getOrElse(""),
+              customerSegments = bmc.data.get("customerSegments").getOrElse(""),
+              costStructure = bmc.data.get("costStructure").getOrElse(""),
+              revenueStreams = bmc.data.get("revenueStreams").getOrElse("")
+            )
+            val infoValue = info.value getOrElse RecordInfo(
+              pitch = info.data.get("pitch").getOrElse(""),
+              name = info.data.get("name").getOrElse(""),
+              company = info.data.get("company").getOrElse(""),
+              companyCreation = info.data.get("companyCreation").flatMap(d => Try(new DateTime(d)).toOption),
+              companyWebsite = info.data.get("companyWebsite").getOrElse(""),
+              email = info.data.get("email").getOrElse(""),
+              phone = info.data.get("phone").getOrElse(""),
+              vine = info.data.get("vine"),
+              twitter = info.data.get("twitter"),
+              angelco = info.data.get("angelco"),
+              presentationUrl = info.data.get("presentationUrl"),
+              amount = info.data.get("amount").flatMap(x => Try(x.toInt).toOption)
+            )
+            u.record.copy(
+              bmc = bmcValue, info = infoValue, date = new DateTime, submitted = !saveonly && u.kind == UserKind.Startup
+            ).update match {
+              case Success(r) => if(saveonly) Ok else Ok(views.html.confirmation())
+              case Failure(e) => InternalServerError
+            }
+          }
         }
-      }
+      } getOrElse Unauthorized
     }
   }
 

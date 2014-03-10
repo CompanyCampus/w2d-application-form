@@ -23,6 +23,8 @@ presentationUrl=URL d''une présentation (slideshare, …)
 amount=Montant recherché en € (pour catégoriser les demandes en fourchettes)
 
 apply=Soumettre votre candidature
+save=Sauvegarder votre candidature
+saveinfo=Vous pouvez sauvegarder votre candidature et revenir pour la finir plus tard, une fois terminée, vous pourrez la soumettre
 
 record.error=Oups, nous avons rencontré un problème. Merci de réessayer.
 confirmation=Félicitations, votre inscription a bien été prise en compte.<br />Nous allons revenir vers vous.
@@ -73,3 +75,7 @@ login.submit=Inscription / Connexion
 incorrectpassword=Mot de passe incorrect
 accountcreated=Compte créé !
 accountvalidated=E-mail validé !
+save.success=Candidature sauvegardée
+save.failed=Une erreur est survenue pendant la sauvegarde
+alreadysubmitted=Candidature déjà soumise
+verifiedemailneeded=Vous devez valider votre adresse e-mail pour pouvoir soumettre votre candidature, vous avez reçu un e-mail à la création de votre compte

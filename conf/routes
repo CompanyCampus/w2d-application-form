@@ -5,7 +5,8 @@
 # Home page
 GET     /                           controllers.Application.index
 GET     /submission                 controllers.Application.submission
-POST    /records                    controllers.Application.addRecord
+PUT     /submission                 controllers.Application.updateRecord
+POST    /records                    controllers.Application.saveRecord
 GET     /records                    controllers.Application.records
 GET     /records/:id                controllers.Application.record(id: java.util.UUID)
 POST    /sessions                   controllers.Application.authenticate

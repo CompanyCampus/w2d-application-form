@@ -23,6 +23,8 @@ presentationUrl=A presentation''s URL (slideshare, …)
 amount=Amount you are looking for in € (for us to categorize applications in ranges)
 
 apply=Apply
+save=Save your application
+saveinfo=You can save your application and come back to finish it later, apply when you are done
 
 record.error=Oops, something wrong happened on our end. Try again?
 confirmation=Congratulations, your application is saved.<br />We will get back to you.
@@ -65,3 +67,7 @@ login.submit=Register / Login
 incorrectpassword=Incorrect password
 accountcreated=Account created!
 accountvalidated=E-mail validated!
+save.success=Application saved
+save.failed=Something wrong happened while saving
+alreadysubmitted=Application already submitted
+verifiedemailneeded=You need to verify your e-mail address to apply, check your e-mails

@@ -31,6 +31,13 @@
       @flash.get("message").map { msg =>
         noty({text: "@msg", type: "default", timeout: 3000});
       }
+
+      var I18N = {
+          savesuccess: "@Messages("save.success")",
+          savefailed: "@Messages("save.failed")",
+          alreadysubmitted: "@Messages("alreadysubmitted")"
+      };
+
       $(Main.init);
     </script>
     <script type="text/javascript">

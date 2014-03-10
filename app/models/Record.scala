@@ -6,14 +6,24 @@ import java.sql.Timestamp
 
 case class Record (
   id: UUID,
+  userId: UUID,
   date: DateTime,
   bmc: RecordBMC,
   info: RecordInfo,
+  submitted: Boolean,
   selected: Boolean
 ) {
 
   def save() = {
     Try {
+      AppDB.dal.Records.add(this)
+      this
+    }
+  }
+
+  def update() = {
+    Try {
+      AppDB.dal.Records.delete(this)
       AppDB.dal.Records.add(this)
       this
     }
@@ -38,38 +48,40 @@ Candidature : https://w2d-form.cleverapps.io/records/""" + this.id.toString()
 }
 
 case class RecordBMC (
-  partners: String,
-  activities: String,
-  resources: String,
-  propositions: String,
-  customerRelationships: String,
-  channels: String,
-  customerSegments: String,
-  costStructure: String,
-  revenueStreams: String
+  partners: String = "",
+  activities: String = "",
+  resources: String = "",
+  propositions: String = "",
+  customerRelationships: String = "",
+  channels: String = "",
+  customerSegments: String = "",
+  costStructure: String = "",
+  revenueStreams: String = ""
 )
 case class RecordInfo(
-  pitch: String,
-  name: String,
-  company: String,
-  companyCreation: DateTime,
-  companyWebsite: String,
-  email: String,
-  phone: String,
-  vine: Option[String],
-  twitter: Option[String],
-  angelco: Option[String],
-  presentationUrl: Option[String],
-  amount: Option[Int]
+  pitch: String = "",
+  name: String = "",
+  company: String = "",
+  companyCreation: Option[DateTime] = None,
+  companyWebsite: String = "",
+  email: String = "",
+  phone: String = "",
+  vine: Option[String] = None,
+  twitter: Option[String] = None,
+  angelco: Option[String] = None,
+  presentationUrl: Option[String] = None,
+  amount: Option[Int] = None
 )
 
 object Record {
-  def create(bmc: RecordBMC, info: RecordInfo): Record = {
+  def createFor(user: User): Record = {
     Record(
       id = UUID.randomUUID(),
+      userId = user.id,
       date = new DateTime,
-      bmc = bmc,
-      info = info,
+      bmc = RecordBMC(),
+      info = RecordInfo(email = user.email),
+      submitted = false,
       selected = false
     )
   }
@@ -80,6 +92,10 @@ object Record {
 
   def getAll() = {
     AppDB.dal.Records.getAll
+  }
+
+  def getOf(user: User) = {
+    AppDB.dal.Records.getOf(user)
   }
 }
 
@@ -95,6 +111,7 @@ trait RecordComponent {
     )
 
     def id = column[UUID]("record_id", O.PrimaryKey)
+    def userId = column[UUID]("user_id")
     def date = column[DateTime]("record_date")
     def partners = column[String]("record_partners")
     def activities = column[String]("record_activities")
@@ -108,7 +125,7 @@ trait RecordComponent {
     def pitch = column[String]("record_pitch")
     def name = column[String]("record_name")
     def companyName = column[String]("record_company_name")
-    def companyCreation = column[DateTime]("record_company_creation")
+    def companyCreation = column[Option[DateTime]]("record_company_creation")
     def companyWebsite = column[String]("record_company_website")
     def email = column[String]("record_email")
     def phone = column[String]("record_phone")
@@ -117,23 +134,24 @@ trait RecordComponent {
     def angelco = column[Option[String]]("record_angelco")
     def presentationUrl = column[Option[String]]("record_presentationUrl")
     def amount = column[Option[Int]]("record_amount")
+    def submitted = column[Boolean]("record_submitted")
     def selected = column[Boolean]("record_selected")
     def * = (
-      id, date,
+      id, userId, date,
       (partners, activities, resources, propositions, customerRelationships,
       channels, customerSegments, costStructure, revenueStreams),
       (pitch, name, companyName, companyCreation, companyWebsite, email, phone,
       vine, twitter, angelco, presentationUrl, amount),
-      selected
-    ).shaped <> ({ case (id, date, bmc, info, selected) =>
+      submitted, selected
+    ).shaped <> ({ case (id, userId, date, bmc, info, submitted, selected) =>
       Record(
-        id, date, RecordBMC.tupled.apply(bmc), RecordInfo.tupled.apply(info),
-        selected
+        id, userId, date, RecordBMC.tupled.apply(bmc), RecordInfo.tupled.apply(info),
+        submitted, selected
       )
     }, { r: Record =>
       Some((
-        r.id, r.date, RecordBMC.unapply(r.bmc).get,
-        RecordInfo.unapply(r.info).get, r.selected
+        r.id, r.userId, r.date, RecordBMC.unapply(r.bmc).get,
+        RecordInfo.unapply(r.info).get, r.submitted, r.selected
       ))
     })
   }
@@ -142,6 +160,12 @@ trait RecordComponent {
     def add(record: Record) = {
       AppDB.database.withSession { implicit session: Session =>
         this.insert(record)
+      }
+    }
+
+    def delete(record: Record) = {
+      AppDB.database.withSession { implicit session: Session =>
+        this.filter(_.id === record.id).delete
       }
     }
 
@@ -154,6 +178,12 @@ trait RecordComponent {
     def getAll() = {
       AppDB.database.withSession { implicit session: Session =>
         this.list
+      }
+    }
+
+    def getOf(user: User) = {
+      AppDB.database.withSession { implicit session: Session =>
+        this.filter(_.userId === user.id).firstOption
       }
     }
   }
