@@ -12,6 +12,7 @@ case class User (
   token: String,
   kind: UserKind
 ) {
+  lazy val record = Record.getOf(this) getOrElse Record.createFor(this)
 
   def save = {
     Try {

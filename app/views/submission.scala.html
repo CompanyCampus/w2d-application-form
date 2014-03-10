@@ -1,17 +1,28 @@
-@(formBMC: Form[RecordBMC], formInfo: Form[RecordInfo], isClosed: Boolean)(implicit request: Request[AnyContent], lang: Lang, flash: Flash)
+@(formBMC: Form[RecordBMC], formInfo: Form[RecordInfo], user: User, submitted: Boolean, isClosed: Boolean)(implicit request: Request[AnyContent], lang: Lang, flash: Flash)
 @import helper.twitterBootstrap._
 
 @main(Messages("title")) {
 
 <h1>@Messages("title")</h1>
-<form action="/records?lang=@lang.code" method="POST">
+<form action="/records?lang=@lang.code" method="POST" class="submission @if(submitted) { alreadysubmitted }" novalidate>
   <p><small>@Messages("required", "*")</small></p>
   @form(formBMC, formInfo)
   <div class="row">
     <div class="span12">
       <p><small>@Messages("required", "*")</small></p>
       <p><small>@Messages("info.publication")</small><br /><br /></p>
-      <input class="btn btn-primary btn-large" type="submit" value="@Messages("apply")" />
+      @if(submitted) {
+        <p>@Messages("alreadysubmitted")</p>
+      } else {
+        <button class="btn btn-large save">@Messages("save")</button>
+        @if(user.kind == UserKind.Unverified) {
+          <input class="btn btn-large" type="submit" value="@Messages("apply") "disabled="disabled" />
+          <p>@Messages("verifiedemailneeded")</p>
+        } else {
+          <input class="btn btn-primary btn-large apply" type="submit" value="@Messages("apply")" />
+        }
+        <p class="saveinfo">@Messages("saveinfo")</p>
+      }
     <div>
   </div>
 </form>
