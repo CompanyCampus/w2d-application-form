@@ -277,7 +277,20 @@ val formInfo = Form(mapping(
   }
 
   def forgottenpasswordPage() = Action { implicit request =>
-    
+    implicit val lang = getLang
+    Ok(views.html.forgottenpassword())
+  }
+
+  def forgottenpassword() = Action { implicit request =>
+    (for {
+      map <- request.body.asFormUrlEncoded
+      emailSeq <- map.get("email")
+      email <- emailSeq.headOption
+      user <- User.get(email)
+    } yield {
+      user.sendResetPasswordEmail
+      Redirect("/").flashing("message" -> Messages("resetpasswordemailsent"))
+    }).getOrElse(BadRequest)
   }
 
   def choosePasswordForm = Form(
@@ -289,7 +302,7 @@ val formInfo = Form(mapping(
 
   def choosePasswordPage(id: UUID, token: String) = Action { implicit request =>
     User.get(id) map { u =>
-      if(u.token == token && u.password.isEmpty) {
+      if(u.token == token) {
         Ok(views.html.choosepassword(choosePasswordForm.fill((token, "")), u))
       } else {
         Forbidden
@@ -303,12 +316,9 @@ val formInfo = Form(mapping(
         formWithErrors => BadRequest(views.html.choosepassword(formWithErrors, u)),
         data => {
           if(u.token == data._1) {
-            if(u.password.isEmpty) {
-              u.setPassword(data._2)
-              Redirect(routes.Application.records).withSession("username" -> u.email)
-            } else {
-              Forbidden
-            }
+            u.setPassword(data._2)
+            u.resetToken()
+            Redirect("/submission").withSession("username" -> u.email)
           } else {
             Unauthorized
           }

@@ -57,6 +57,10 @@ backtorecords=Go back to the applications list
 choosepassword.title=Choose your password
 choosepassword.button=Save
 
+forgottenpassword.title=Forgotten password
+forgottenpassword.button=Send a reset password e-mail
+resetpasswordemailsent=Reset password e-mail sent
+
 login.email.label=E-mail
 login.email.placeholder=john+startupcontest@doe.name
 login.password.label=Password

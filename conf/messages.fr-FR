@@ -24,6 +24,7 @@ amount=Montant recherché en € (pour catégoriser les demandes en fourchettes)
 
 apply=Soumettre votre candidature
 save=Sauvegarder votre candidature
+saveinfo=Vous pouvez sauvegarder votre candidature et revenir pour la finir plus tard, une fois terminée, vous pourrez la soumettre
 
 record.error=Oups, nous avons rencontré un problème. Merci de réessayer.
 confirmation=Félicitations, votre inscription a bien été prise en compte.<br />Nous allons revenir vers vous.
@@ -64,10 +65,15 @@ adduser.button=Créer & envoyer un e-mail
 choosepassword.title=Choisissez votre mot de passe
 choosepassword.button=Sauvegarder
 
+forgottenpassword.title=Mot de passe oublié
+forgottenpassword.button=Envoyer un e-mail de remise à zéro de mot de passe
+resetpasswordemailsent=E-mail de remise à zéro de mot de passe envoyé
+
 login.email.label=E-mail
 login.email.placeholder=jean+startupcontest@martin.name
 login.password.label=Mot de passe
 login.password.placeholder=Mon mot de passe sécurisé
+login.forgottenpassword=Mot de passe oublié ?
 login.submit=Inscription / Connexion
 
 incorrectpassword=Mot de passe incorrect

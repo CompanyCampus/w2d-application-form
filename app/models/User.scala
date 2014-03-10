@@ -74,6 +74,29 @@ Click here: $link
     )
   }
 
+  def sendResetPasswordEmail() {
+    import _root_.util.Mailer
+
+    val link =
+      (configuration getString "baseurl" getOrElse "https://w2d-startupcontest.cleverapps.io/") +
+      "users/" + this.id.toString + "/choosepassword?token=" + this.token
+
+    Mailer.send(
+      subject = "Reset your Startup Contest account password",
+      recipient = this.email,
+      from = "W2D2014 Startup Contest <noreply@companycamp.us>",
+      message = s"""
+Hello,
+
+You have requested to reset the password of your Startup Contest account.
+
+Click here to do so: $link
+
+If you didn't ask for this, you can simply ignore this e-mail.
+"""
+    )
+  }
+
   def sendCreatedEmail() {
     import _root_.util.Mailer
     
